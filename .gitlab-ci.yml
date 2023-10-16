@@ -22,7 +22,7 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
 
 variables:
-  SOLUTION_FILE: YourSolution.sln
+  SOLUTION_FILE: Aerotec.sln
 
 build-job:       # This job runs in the build stage, which runs first.
   image: mcr.microsoft.com/dotnet/sdk:latest
