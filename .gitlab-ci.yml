@@ -21,11 +21,21 @@ stages:          # List of stages for jobs, and their order of execution
   - test
   - deploy
 
+variables:
+  SOLUTION_FILE: Aerotec.sln
+
+   
 build-job:       # This job runs in the build stage, which runs first.
+  image: mcr.microsoft.com/dotnet/sdk:6.0
   stage: build
   script:
-    - echo "Compiling the code..."
-    - echo "Compile complete."
+    - echo "Build started"
+    - 'dotnet restore $SOLUTION_FILE'
+    - 'dotnet build $SOLUTION_FILE --no-restore'
+    - echo "Build finished"
+  artifacts:
+    paths:
+      - '**/bin/'
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
