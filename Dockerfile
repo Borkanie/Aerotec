@@ -1,4 +1,5 @@
-FROM  mcr.microsoft.com/dotnet/sdk:6.0
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+CMD echo "Hello World from Windows"
 
 # Download .NET Framework 4.8 web installer
 ADD https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-web-installer C:\\dotnet-installer.exe
