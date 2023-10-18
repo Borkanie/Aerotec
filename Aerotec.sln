@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aerotec", "Aerotec.csproj", "{519F44E1-FBA6-0894-2D31-DA1B27E76C5D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aerotec.GUI", "Aerotec.GUI\Aerotec.GUI.csproj", "{4586BECB-A26F-445A-9F8A-858C381E4066}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aerotec.Data", "Aerotec.Data\Aerotec.Data.csproj", "{53524948-3732-4709-9183-EF2EF5099904}"
