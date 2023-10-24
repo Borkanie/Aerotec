@@ -12,10 +12,7 @@ namespace Aerotec.Data.Factories
 
         public static List<User> GetUsers()
         {
-            if (users == null)
-            {
-                GenerateUsers();
-            }
+            GenerateUsers();
             return users;
         }
 
@@ -35,11 +32,10 @@ namespace Aerotec.Data.Factories
 
         public static List<string> GetUserNames()
         {
-            if (users == null)
-            {
-                GenerateUsers();
-            }
-            List<string> result = new List<string>();
+           
+            GenerateUsers();
+            
+            List<string> result = new();
             foreach (var user in users)
             {
                 result.Add(user.Name);
