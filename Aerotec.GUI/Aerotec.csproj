@@ -6,13 +6,10 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-<<<<<<< Updated upstream:Aerotec.GUI/Aerotec.GUI.csproj
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
-=======
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <ApplicationIcon>download.ico</ApplicationIcon>
->>>>>>> Stashed changes:Aerotec.GUI/Aerotec.csproj
   </PropertyGroup>
 
   <ItemGroup>
