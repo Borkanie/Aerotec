@@ -2,6 +2,9 @@
 
 namespace Aerotec.GUI.ViewModel
 {
+    /// <summary>
+    /// A viewModel that allows property binding in winforms.
+    /// </summary>
     public class TextBindingModel : INotifyPropertyChanged
     {
         private string _myTextProperty;

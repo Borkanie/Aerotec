@@ -23,7 +23,7 @@ namespace Aerotec.Data.Services
             fileInterface.TextReaderEvent += FileInterface_TextReaderEvent;
         }
 
-        private void FileInterface_TextReaderEvent(object? sender, ReadMEssageEventArg e)
+        private void FileInterface_TextReaderEvent(object? sender, ReadMessageEventArg e)
         {
 
             if (e.Text.Contains("error"))
@@ -59,14 +59,10 @@ namespace Aerotec.Data.Services
             return true;
         }
 
-        public void Send(string text, bool final = false)
+        public void Send(string text)
         {
-            Log.Write(text);
+            Log.WriteLine(text);
             fileInterface.Write("Send method called with text: " + text);
-            if (final)
-            {
-                fileInterface.FinalizeReading();
-            }
         }
 
         public void StartWriting(FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
@@ -93,6 +89,11 @@ namespace Aerotec.Data.Services
             fileInterface.StopReading();
             fileInterface.Write("StopCommand method called");
             Send("^0!ST");
+        }
+
+        public void SetCount(int Expected, int current)
+        {
+            throw new NotImplementedException();
         }
     }
 }

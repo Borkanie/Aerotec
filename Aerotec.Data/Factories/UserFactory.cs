@@ -6,18 +6,18 @@ using Newtonsoft.Json;
 
 namespace Aerotec.Data.Factories
 {
+    /// <summary>
+    /// A factory that reads the users from the json file.
+    /// </summary>
     static public class UserFactory
     {
-        static private List<User> users = null;
-
+        /// <summary>
+        /// Returns all the users in the json file.
+        /// </summary>
+        /// <returns></returns>
         public static List<User> GetUsers()
         {
-            GenerateUsers();
-            return users;
-        }
 
-        private static void GenerateUsers()
-        {
             // Read the JSON data from a file
             string jsonFilePath = "Resources/Controllers.json"; // Update with your JSON file path
             string json;
@@ -27,13 +27,22 @@ namespace Aerotec.Data.Factories
 
 
             // Deserialize the JSON data into a list of User objects
-            users = JsonConvert.DeserializeObject<List<User>>(json);
+            var users = JsonConvert.DeserializeObject<List<User>>(json); 
+            if(users == null)
+            {
+                throw new Exception($"Eroare de citire fisier la {jsonFilePath}. Nu exista angajati inregistrati in fisier.");
+            }
+            return users;
         }
 
+        /// <summary>
+        /// Returns all the names of the Users.
+        /// </summary>
+        /// <returns></returns>
         public static List<string> GetUserNames()
         {
            
-            GenerateUsers();
+            var users = GetUsers();
             
             List<string> result = new();
             foreach (var user in users)

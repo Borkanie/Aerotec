@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="6.2.10" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Aerotec.Data\Aerotec.Data.csproj" />
   </ItemGroup>
 

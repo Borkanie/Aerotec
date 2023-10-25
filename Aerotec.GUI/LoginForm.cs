@@ -7,6 +7,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Aerotec.GUI
 {
+    /// <summary>
+    /// Form used to allow log in and choosing current controller.
+    /// </summary>
     public partial class LoginForm : Form
     {
         private List<string> comboBoxNames;

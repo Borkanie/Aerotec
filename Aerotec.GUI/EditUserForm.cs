@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace Aerotec
 {
+    /// <summary>
+    /// Form allowing to manipulate users using a <see cref="DataGridView"/>
+    /// </summary>
     public partial class EditUserForm : Form
     {
         private List<User> people;

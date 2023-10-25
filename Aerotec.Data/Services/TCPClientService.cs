@@ -10,6 +10,11 @@ using System.Text;
 
 namespace Aerotec.Data.Services
 {
+
+    /// <summary>
+    /// This implementation needs a machine to connect to in order to work. 
+    /// <inheritdoc cref="IClientService"/>
+    /// </summary>
     public class TCPClientService : IClientService
     {
         private int expectedQuantity = 0;
@@ -20,6 +25,7 @@ namespace Aerotec.Data.Services
         public event EventHandler<Jet3UpMessageHendlerEventArgs> Jet3UpMessageHendler;
         public event EventHandler<Jet3UpCommunicationInterruptedErrorEventArgs> Jet3UpCommunicationInterrupted;
 
+        /// <inheritdoc/>
         public bool Connect(string Ip, int port)
         {
             client = new TcpClient(Ip, port);
@@ -28,19 +34,22 @@ namespace Aerotec.Data.Services
             return true;
         }
 
+        /// <inheritdoc/>
         public void ContinueWriting()
         {
             Send("^0!GO");
         }
 
+        /// <inheritdoc/>
         public bool IsConnected()
         {
             return client != null;
         }
 
-        public void Send(string text, bool final = false)
+        /// <inheritdoc/>
+        public void Send(string text)
         {
-            Log.Write(text);
+            Log.WriteLine(text);
             if (IsConnected())
             {
                 byte[] SENDBYTES = Encoding.ASCII.GetBytes(text + Constants.vbCrLf);
@@ -59,34 +68,49 @@ namespace Aerotec.Data.Services
             }
         }
 
+        /// <inheritdoc/>
         public void StartWriting(FontSizeEnum size,int rotation,MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
         {
             this.expectedQuantity = expectedQuantity;
             string message;
             Send("^0!RC");
-            var jet3upMessageBuilder = Jet3UpMessageBuilder.Start().Create().SetSize(size, rotation, machine);
-            
-            message = (anzahl == null) ? jet3upMessageBuilder.Write(HTZ, signature, ANR, BTIDX, controllerId).End():
-                jet3upMessageBuilder.Write(HTZ, signature, ANR, BTIDX, controllerId, anzahl).End();
 
+            var jet3upMessageBuilder = Jet3UpMessageBuilder.Start().Create();
+            
+            if (anzahl == null)
+            {
+                
+                message = jet3upMessageBuilder.SetSize(size, rotation, machine).Write(HTZ, signature, ANR, BTIDX, controllerId).End();
+            }
+            else
+            {
+                message = jet3upMessageBuilder.SetSize(FontSizeEnum.ISO1_7x5, rotation, MachineTypeEnum.Neagra).Write(HTZ, signature, ANR, BTIDX, controllerId, anzahl).End();
+            }
+            Thread.Sleep(500);
             Send(message);
             Send("^0=CC0" + Constants.vbTab + expectedQuantity.ToString() + Constants.vbTab + "3999");
             Send("^0!EQ");
-            StartListening();
+            Thread.Sleep(500);
+            Send("^0!GO");
+            if (anzahl == null)
+                StartListening();
         }
 
+        /// <inheritdoc/>
         public void StopListening()
         {
             cancellationTokenSource?.Cancel();
             cancellationTokenSource = null;
         }
 
+        /// <inheritdoc/>
         public void StopCommand()
         {
             StopListening();
             Send("^0!ST");
         }
 
+        /// <inheritdoc/>
         public void StartListening()
         {
             if (IsConnected())
@@ -100,6 +124,7 @@ namespace Aerotec.Data.Services
             }
         }
 
+        /// <inheritdoc/>
         private void ListenForResponses(CancellationToken cancellationToken)
         {
             Thread.Sleep(2000);
@@ -130,6 +155,7 @@ namespace Aerotec.Data.Services
                             ContinueWriting();
                         }
                         Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Resources.Jet3UpStatusMessageType.Marked, response.Split('C')[2].Split('\t')[0]));
+                        
                     }
 
                 }
@@ -140,6 +166,7 @@ namespace Aerotec.Data.Services
             }
         }
 
+        /// <inheritdoc/>
         private int NumberOfDigitsInInt(int expectedQuantity)
         {
             int result = 0;
@@ -151,6 +178,7 @@ namespace Aerotec.Data.Services
             return result;
         }
 
+        /// <inheritdoc/>
         private int AskForCurrentIndex(ref byte[] buffer)
         {
             int bytesRead;
@@ -162,6 +190,12 @@ namespace Aerotec.Data.Services
             }
 
             return bytesRead;
+        }
+
+        /// <inheritdoc/>
+        public void SetCount(int Expected, int current)
+        {
+            Send($"^0=CC{current} {Constants.vbTab} {Expected} 3999");
         }
     }
 }

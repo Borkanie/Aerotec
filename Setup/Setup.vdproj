@@ -237,7 +237,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Aerotec"
         "ProductCode" = "8:{219FE9BA-DD13-4E01-A536-5CA96D940BE3}"
-        "PackageCode" = "8:{42FF356D-2D01-42EB-B583-CBE1EB924201}"
+        "PackageCode" = "8:{6F97F1AB-F128-4283-832A-3CEEE5ED0C7E}"
         "UpgradeCode" = "8:{AC3B9BE2-43F3-4838-BAC3-B5BDA770C388}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -357,20 +357,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4E595BE3A46E42B88F74EC27A30EB4CC"
-            {
-            "Name" = "8:Shortcut to %sPrimary output from Aerotec (Active)"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_12507AC72B624E5A80AB5A78E6E81055"
-            "Folder" = "8:_48F9D83E8A56485191AD81EAC69C4139"
-            "WorkingFolder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6357D0C1FC50481A86C800BCDDB50F49"
             {
             "Name" = "8:Shortcut to %sPrimary output from Aerotec (Active)"
@@ -800,7 +786,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_06313CEB0DF94392A8ECFD392498EE84"
             {
-            "SourcePath" = "8:..\\Aerotec.GUI\\obj\\Debug\\net6.0-windows\\Aerotec.dll"
+            "SourcePath" = "8:..\\Aerotec.GUI\\obj\\Release\\net6.0-windows\\Aerotec.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
@@ -828,7 +814,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_12507AC72B624E5A80AB5A78E6E81055"
             {
-            "SourcePath" = "8:..\\Aerotec.GUI\\obj\\Debug\\net6.0-windows\\Aerotec.dll"
+            "SourcePath" = "8:..\\Aerotec.GUI\\obj\\Release\\net6.0-windows\\Aerotec.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
@@ -940,7 +926,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BD5D43B229194344BFFEC9234D6F1FD8"
             {
-            "SourcePath" = "8:..\\Aerotec.GUI\\obj\\Debug\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\Aerotec.GUI\\obj\\Release\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"

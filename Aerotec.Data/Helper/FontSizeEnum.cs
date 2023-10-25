@@ -3,6 +3,9 @@
 
 namespace Aerotec.Data.Helper
 {
+    /// <summary>
+    /// Possible fontSizes available in the machine.
+    /// </summary>
     public enum FontSizeEnum
     {
         ISO1_5x3,

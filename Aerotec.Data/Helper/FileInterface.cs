@@ -3,6 +3,9 @@
 
 namespace Aerotec.Data.Helper
 {
+    /// <summary>
+    /// Interface used to mock machine interaction with file interaction from the disk.
+    /// </summary>
     internal class FileInterface
     {
         private readonly string inputPath = Environment.CurrentDirectory + "\\" + "jet3up.in";
@@ -43,7 +46,7 @@ namespace Aerotec.Data.Helper
                             break;
 
                         lastLine++;
-                        TextReaderEvent?.Invoke(this, new ReadMEssageEventArg((++count).ToString()));
+                        TextReaderEvent?.Invoke(this, new ReadMessageEventArg((++count).ToString()));
                         Thread.Sleep(1000);
 
                         if (lastLine == quantity)
@@ -70,7 +73,7 @@ namespace Aerotec.Data.Helper
             }
         }
 
-        public event EventHandler<ReadMEssageEventArg> TextReaderEvent;
+        public event EventHandler<ReadMessageEventArg> TextReaderEvent;
 
         public void Write(string text)
         {

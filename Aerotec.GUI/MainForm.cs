@@ -8,10 +8,14 @@ using Aerotec.Data.Resources;
 using Aerotec.Data.Services;
 using Aerotec.GUI.Resources.Helper;
 using Aerotec.GUI.ViewModel;
+using OfficeOpenXml;
 using System.Security.Cryptography.Xml;
 
 namespace Aerotec.GUI
 {
+    /// <summary>
+    /// Main interface.
+    /// </summary>
     public partial class MainForm : Form
     {
         private IClientService jet3UpClientService;
@@ -21,12 +25,24 @@ namespace Aerotec.GUI
         private TextBindingModel ControllerName = new();
         private TextBindingModel BTID = new();
         private TextBindingModel HTZ = new();
-        private TextBindingModel ANR = new();        
+        private TextBindingModel ANR = new();
         private const int OriginalFontSize = 9;
         private bool sentFinal = false;
         private readonly Dictionary<Control, Tuple<Point, Size>> OriginalElements = new();
+        private readonly int[] rotationArray = new int[]
+            {
+                0,
+                90,
+                180,
+                270
+            };
+
         public MainForm(LogInInformation logInInfo)
         {
+
+            // If you use EPPlus in a noncommercial context
+            // according to the Polyform Noncommercial license:
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             InitializeComponent();
             LinkTextBoxes();
             SetupComboBoxes();
@@ -69,10 +85,12 @@ namespace Aerotec.GUI
         private void Scannare_PreviewKey(object? sender, PreviewKeyDownEventArgs e)
         {
 
+            Log.WriteLine(e.KeyValue.ToString() + " " + e.KeyData);
 
-            if (e.KeyValue <= 20 && e.KeyValue!=8)
+            //return;
+            if (e.KeyValue == 13)
             {
-                if(sender == ANRTextBox)
+                if (sender == ANRTextBox)
                 {
                     HTZTextBox.Focus();
                     return;
@@ -93,7 +111,7 @@ namespace Aerotec.GUI
                     return;
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -130,13 +148,7 @@ namespace Aerotec.GUI
             ComboBoxMachine.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
-            var rotationArray = new int[]
-            {
-                0,
-                90,
-                180,
-                270
-            };
+            
 
             // Populate the ComboBox with enum values
             foreach (var size in rotationArray)
@@ -169,7 +181,7 @@ namespace Aerotec.GUI
             }
             else
             {
-                jet3UpClientService = new TCPClientService();               
+                jet3UpClientService = new TCPClientService();
             }
             _ = jet3UpClientService.Connect(logInInfo.Address.ToString(), 3000);
             jet3UpClientService.Jet3UpMessageHendler += Jet3UpMessageHandler;
@@ -328,7 +340,7 @@ namespace Aerotec.GUI
         /// <param name="e"></param>
         private void ContactForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            if(contactForm!= null)
+            if (contactForm != null)
             {
                 contactForm.Close();
             }
@@ -342,6 +354,30 @@ namespace Aerotec.GUI
         private void StartStopButton_Click(object sender, EventArgs e)
         {
             Working = !Working;
+        }
+
+
+        /// <summary>
+        /// Increases the current quantity registered in the machine.
+        /// </summary>
+        /// <param name="sender">UNUSED</param>
+        /// <param name="e">UNUSED</param>
+        private void IncreaseCurrentCount_Click(object sender, EventArgs e)
+        {
+            if (CurrentQuantityTextBox.Text != ExpectedQuantityTxtBox.Text)
+                jet3UpClientService.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text) + 1);
+        }
+
+        /// <summary>
+        /// Decreases the current quantity from the machine.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DecreaseCurrentCount_Click(object sender, EventArgs e)
+        {
+            if (CurrentQuantityTextBox.Text != "0")
+                jet3UpClientService.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text) - 1);
+
         }
         #endregion
 
@@ -379,7 +415,10 @@ namespace Aerotec.GUI
                     sentFinal = true;
                     var Stand = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
                     //$"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand"
-                    WriteOnTxtFile($"{ANRTextBox.Text}                      {HTZTextBox.Text}                  {BTIDTextBox.Text}          {ControllerIdTextBox.Text}            {ExpectedQuantityTxtBox.Text}        {CurrentQuantityTextBox.Text}     {Stand}");
+
+                    var fertig = (ExpectedQuantityTxtBox.Text == CurrentQuantityTextBox.Text) ? "fertig" : "Nicht fertig";
+                    WriteOnTxtFile($"{ANRTextBox.Text}                                  {HTZTextBox.Text}                 {BTIDTextBox.Text}           {ControllerTextBox.Text}         {ExpectedQuantityTxtBox.Text}        {CurrentQuantityTextBox.Text}     {fertig}");
+                    WriteOnExcelFile();
                     return;
                 default:
                     StartStopWorking(false);
@@ -387,21 +426,87 @@ namespace Aerotec.GUI
             }
         }
 
+        private void WriteOnExcelFile()
+        {
+            try
+            {
+                string imprimareFolderPath = Path.Combine("C:\\", "Imprimare");
+
+                // Check if the directory exists, and if not, create it
+                if (!Directory.Exists(imprimareFolderPath))
+                {
+                    Directory.CreateDirectory(imprimareFolderPath);
+                }
+
+                string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
+                string filePath = Path.Combine(imprimareFolderPath, $"{currentDate}.xlsx");
+
+                // Check if the file exists, and if not, create it
+                if (!File.Exists(filePath))
+                {
+                    using (var package = new ExcelPackage())
+                    {
+                        var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                        worksheet.Cells[1, 1].Value = $"TargetsProtokill vom {currentDate}";
+                        worksheet.Cells[2, 1].Value = "Auftrag";
+                        worksheet.Cells[2, 2].Value = "HTZ-Nr.";
+                        worksheet.Cells[2, 3].Value = "Index";
+                        worksheet.Cells[2, 4].Value = "PKZ";
+                        worksheet.Cells[2, 5].Value = "Soll";
+                        worksheet.Cells[2, 6].Value = "Ist";
+                        worksheet.Cells[2, 7].Value = "Stand";
+
+
+                        package.SaveAs(new FileInfo(filePath));
+                    }
+                }
+
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    var worksheet = package.Workbook.Worksheets[0];
+                    int rowCount = worksheet.Dimension.Rows;
+                    worksheet.Cells[rowCount + 1, 1].Value = ANRTextBox.Text;
+                    worksheet.Cells[rowCount + 1, 2].Value = HTZTextBox.Text;
+                    worksheet.Cells[rowCount + 1, 3].Value = BTIDTextBox.Text;
+                    worksheet.Cells[rowCount + 1, 4].Value = ControllerIdTextBox.Text;
+                    worksheet.Cells[rowCount + 1, 5].Value = ExpectedQuantityTxtBox.Text;
+                    worksheet.Cells[rowCount + 1, 6].Value = CurrentQuantityTextBox.Text;
+                    worksheet.Cells[rowCount + 1, 7].Value = (ExpectedQuantityTxtBox.Text == CurrentQuantityTextBox.Text) ? "fertig" : "Nicht fertig";
+
+                    package.Save();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
+
         private void WriteOnTxtFile(string message)
         {
             try
             {
 
-                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string imprimareFolderPath = Path.Combine("C:\\", "Imprimare");
+
+                // Check if the directory exists, and if not, create it
+                if (!Directory.Exists(imprimareFolderPath))
+                {
+                    Directory.CreateDirectory(imprimareFolderPath);
+                }
+
                 string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
-                string filePath = Path.Combine(desktopPath, $"{currentDate}A.txt");
+                string filePath = Path.Combine(imprimareFolderPath, $"{currentDate}.txt");
                 // Check if the file exists, and if not, create it
                 if (!File.Exists(filePath))
                 {
                     using (StreamWriter writer = File.CreateText(filePath))
                     {
                         writer.WriteLine($"TargetsProtokill vom {currentDate}");
-                        writer.WriteLine($"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand");
+                        writer.WriteLine($"Auftrag                                        HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand");
                         writer.WriteLine(message);
                     }
                 }
@@ -523,6 +628,5 @@ namespace Aerotec.GUI
             }
         }
         #endregion
-
     }
 }
