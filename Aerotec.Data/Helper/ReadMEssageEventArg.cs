@@ -6,10 +6,10 @@ namespace Aerotec.Data.Helper
     /// <summary>
     /// A message has been read from the fileinterface.Used in mockup.
     /// </summary>
-    public class ReadMEssageEventArg : EventArgs
+    public class ReadMessageEventArg : EventArgs
     {
         public string Text { get; }
-        public ReadMEssageEventArg(string text)
+        public ReadMessageEventArg(string text)
         {
             Text = text;
         }

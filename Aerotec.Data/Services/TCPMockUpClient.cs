@@ -65,7 +65,7 @@ namespace Aerotec.Data.Services
             fileInterface.Write("Send method called with text: " + text);
         }
 
-        public void StartWriting(FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
+        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
         {
             string message;
             Send("^0!RC");
@@ -93,7 +93,7 @@ namespace Aerotec.Data.Services
 
         public void SetCount(int Expected, int current)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Aerotec.Data.Interface.Services
         /// <summary>
         /// Creates the standardized objects to send to the machine to print.
         /// </summary>
+        /// <param name="delay"> The delay of the writing command in micrometers.</param>
         /// <param name="size">The desired <see cref="FontSizeEnum"/> of the writing.</param>
         /// <param name="rotation">The machine has two flags, 180 dgereees and mirrored.
         /// This are configured trough the ehternet interface using an angle of 0 90 180 or 270. 
@@ -41,7 +42,7 @@ namespace Aerotec.Data.Interface.Services
         /// <param name="anzahl">Final message string.
         /// If it's NOT NULL the message will be considered final message and standard size will be written for black machine.
         /// Client specified this configuration.</param>
-        public void StartWriting(FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl);
+        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl);
 
         /// <summary>
         /// After each message requesting current counter a go message needs to be sent to the machine.

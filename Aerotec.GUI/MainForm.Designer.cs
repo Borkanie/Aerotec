@@ -56,6 +56,10 @@ namespace Aerotec.GUI
             ANRTextBox = new TextBox();
             label6 = new Label();
             groupBox4 = new GroupBox();
+            label10 = new Label();
+            DelayTextBox = new TextBox();
+            ButtonDecreaseCurrentCount = new Button();
+            ButtonIncreaseCurrentCount = new Button();
             label8 = new Label();
             CurrentQuantityTextBox = new TextBox();
             SizeComboBox = new ComboBox();
@@ -65,8 +69,6 @@ namespace Aerotec.GUI
             pictureBox2 = new PictureBox();
             StartStopButton = new Button();
             ContactButton = new Button();
-            ButtonIncreaseCurrentCount = new Button();
-            ButtonDecreaseCurrentCount = new Button();
             INFORMATI.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -311,7 +313,7 @@ namespace Aerotec.GUI
             label6.Anchor = AnchorStyles.Right;
             label6.AutoSize = true;
             label6.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(18, 33);
+            label6.Location = new Point(9, 67);
             label6.Name = "label6";
             label6.Size = new Size(214, 17);
             label6.TabIndex = 3;
@@ -320,6 +322,8 @@ namespace Aerotec.GUI
             // groupBox4
             // 
             groupBox4.Anchor = AnchorStyles.Right;
+            groupBox4.Controls.Add(label10);
+            groupBox4.Controls.Add(DelayTextBox);
             groupBox4.Controls.Add(ButtonDecreaseCurrentCount);
             groupBox4.Controls.Add(ButtonIncreaseCurrentCount);
             groupBox4.Controls.Add(label8);
@@ -330,17 +334,61 @@ namespace Aerotec.GUI
             groupBox4.Controls.Add(label6);
             groupBox4.Location = new Point(393, 142);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(395, 191);
+            groupBox4.Size = new Size(395, 209);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             groupBox4.Text = "MARIMEA SI CANTITATE";
+            // 
+            // label10
+            // 
+            label10.Anchor = AnchorStyles.Right;
+            label10.AutoSize = true;
+            label10.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(85, 31);
+            label10.Name = "label10";
+            label10.Size = new Size(138, 17);
+            label10.TabIndex = 14;
+            label10.Text = "DELAY(micrometri):";
+            label10.Click += label10_Click;
+            // 
+            // DelayTextBox
+            // 
+            DelayTextBox.Anchor = AnchorStyles.Right;
+            DelayTextBox.Location = new Point(238, 26);
+            DelayTextBox.Name = "DelayTextBox";
+            DelayTextBox.Size = new Size(151, 27);
+            DelayTextBox.TabIndex = 13;
+            DelayTextBox.Text = "2000";
+            DelayTextBox.TextChanged += DelayTextBox_TextChanged;
+            // 
+            // ButtonDecreaseCurrentCount
+            // 
+            ButtonDecreaseCurrentCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ButtonDecreaseCurrentCount.Location = new Point(344, 166);
+            ButtonDecreaseCurrentCount.Name = "ButtonDecreaseCurrentCount";
+            ButtonDecreaseCurrentCount.Size = new Size(26, 25);
+            ButtonDecreaseCurrentCount.TabIndex = 12;
+            ButtonDecreaseCurrentCount.Text = "-";
+            ButtonDecreaseCurrentCount.UseVisualStyleBackColor = true;
+            ButtonDecreaseCurrentCount.Click += DecreaseCurrentCount_Click;
+            // 
+            // ButtonIncreaseCurrentCount
+            // 
+            ButtonIncreaseCurrentCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ButtonIncreaseCurrentCount.Location = new Point(270, 166);
+            ButtonIncreaseCurrentCount.Name = "ButtonIncreaseCurrentCount";
+            ButtonIncreaseCurrentCount.Size = new Size(26, 25);
+            ButtonIncreaseCurrentCount.TabIndex = 11;
+            ButtonIncreaseCurrentCount.Text = "+";
+            ButtonIncreaseCurrentCount.UseVisualStyleBackColor = true;
+            ButtonIncreaseCurrentCount.Click += IncreaseCurrentCount_Click;
             // 
             // label8
             // 
             label8.Anchor = AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(51, 79);
+            label8.Location = new Point(42, 101);
             label8.Name = "label8";
             label8.Size = new Size(181, 17);
             label8.TabIndex = 10;
@@ -349,17 +397,18 @@ namespace Aerotec.GUI
             // CurrentQuantityTextBox
             // 
             CurrentQuantityTextBox.Anchor = AnchorStyles.Right;
-            CurrentQuantityTextBox.Location = new Point(238, 115);
+            CurrentQuantityTextBox.Location = new Point(238, 133);
             CurrentQuantityTextBox.Name = "CurrentQuantityTextBox";
             CurrentQuantityTextBox.Size = new Size(151, 27);
             CurrentQuantityTextBox.TabIndex = 9;
             CurrentQuantityTextBox.Text = "0";
+            CurrentQuantityTextBox.TextChanged += CurrentQuantityTextBox_TextChanged;
             // 
             // SizeComboBox
             // 
             SizeComboBox.Anchor = AnchorStyles.Right;
             SizeComboBox.FormattingEnabled = true;
-            SizeComboBox.Location = new Point(238, 26);
+            SizeComboBox.Location = new Point(238, 62);
             SizeComboBox.Name = "SizeComboBox";
             SizeComboBox.Size = new Size(151, 28);
             SizeComboBox.TabIndex = 8;
@@ -367,11 +416,12 @@ namespace Aerotec.GUI
             // ExpectedQuantityTxtBox
             // 
             ExpectedQuantityTxtBox.Anchor = AnchorStyles.Right;
-            ExpectedQuantityTxtBox.Location = new Point(238, 69);
+            ExpectedQuantityTxtBox.Location = new Point(238, 96);
             ExpectedQuantityTxtBox.Name = "ExpectedQuantityTxtBox";
             ExpectedQuantityTxtBox.Size = new Size(151, 27);
             ExpectedQuantityTxtBox.TabIndex = 7;
             ExpectedQuantityTxtBox.Text = "0";
+            ExpectedQuantityTxtBox.TextChanged += ExpectedQuantityTxtBox_TextChanged;
             ExpectedQuantityTxtBox.KeyPress += ExpectedQuantityTxtBox_KeyPress;
             // 
             // label7
@@ -379,7 +429,7 @@ namespace Aerotec.GUI
             label7.Anchor = AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(104, 115);
+            label7.Location = new Point(95, 143);
             label7.Name = "label7";
             label7.Size = new Size(128, 17);
             label7.TabIndex = 6;
@@ -389,9 +439,9 @@ namespace Aerotec.GUI
             // 
             pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(672, 339);
+            pictureBox1.Location = new Point(686, 357);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(116, 115);
+            pictureBox1.Size = new Size(102, 97);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
@@ -408,7 +458,7 @@ namespace Aerotec.GUI
             // StartStopButton
             // 
             StartStopButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            StartStopButton.Location = new Point(393, 361);
+            StartStopButton.Location = new Point(393, 375);
             StartStopButton.Name = "StartStopButton";
             StartStopButton.Size = new Size(157, 63);
             StartStopButton.TabIndex = 7;
@@ -419,35 +469,13 @@ namespace Aerotec.GUI
             // ContactButton
             // 
             ContactButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ContactButton.Location = new Point(571, 361);
+            ContactButton.Location = new Point(580, 371);
             ContactButton.Name = "ContactButton";
             ContactButton.Size = new Size(86, 63);
             ContactButton.TabIndex = 8;
             ContactButton.Text = "CONTACT";
             ContactButton.UseVisualStyleBackColor = true;
             ContactButton.Click += ContactButton_Click;
-            // 
-            // button1
-            // 
-            ButtonIncreaseCurrentCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ButtonIncreaseCurrentCount.Location = new Point(260, 148);
-            ButtonIncreaseCurrentCount.Name = "button1";
-            ButtonIncreaseCurrentCount.Size = new Size(26, 25);
-            ButtonIncreaseCurrentCount.TabIndex = 11;
-            ButtonIncreaseCurrentCount.Text = "+";
-            ButtonIncreaseCurrentCount.UseVisualStyleBackColor = true;
-            ButtonIncreaseCurrentCount.Click += IncreaseCurrentCount_Click;
-            // 
-            // button2
-            // 
-            ButtonDecreaseCurrentCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ButtonDecreaseCurrentCount.Location = new Point(335, 148);
-            ButtonDecreaseCurrentCount.Name = "button2";
-            ButtonDecreaseCurrentCount.Size = new Size(26, 25);
-            ButtonDecreaseCurrentCount.TabIndex = 12;
-            ButtonDecreaseCurrentCount.Text = "-";
-            ButtonDecreaseCurrentCount.UseVisualStyleBackColor = true;
-            ButtonDecreaseCurrentCount.Click += DecreaseCurrentCount_Click;
             // 
             // MainForm
             // 
@@ -515,5 +543,7 @@ namespace Aerotec.GUI
         private ComboBox ComboBoxRotation;
         private Button ButtonDecreaseCurrentCount;
         private Button ButtonIncreaseCurrentCount;
+        private Label label10;
+        private TextBox DelayTextBox;
     }
 }

@@ -203,7 +203,19 @@ namespace Aerotec.Data.Factories
             }
         }
 
-        public Jet3UpMessageBuilder SetSize(FontSizeEnum size,int rotation, MachineTypeEnum machineType, int printGoSignal = 0, int encoderSignal = 0, int encoderSpeed = 10, int encoderResolution = 700)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="delay">Print go delay in micro meters</param>
+        /// <param name="size"></param>
+        /// <param name="rotation"></param>
+        /// <param name="machineType"></param>
+        /// <param name="printGoSignal"></param>
+        /// <param name="encoderSignal"></param>
+        /// <param name="encoderSpeed"></param>
+        /// <param name="encoderResolution"></param>
+        /// <returns></returns>
+        public Jet3UpMessageBuilder SetSize(FontSizeEnum size,int rotation, MachineTypeEnum machineType, int delay = 2000, int printGoSignal = 0, int encoderSignal = 0, int encoderSpeed = 10, int encoderResolution = 700)
         {
             this.size = size;
             this.machineType = machineType;
@@ -214,19 +226,19 @@ namespace Aerotec.Data.Factories
                     message += "^0*BEGINLJSCRIPT [()]" + Constants.vbCrLf
                             + $"^0*JLPAR [ 60 1 0 3 1000 {rotation} 0 30000 00:00 0 30000 0 0 1000]" + Constants.vbCrLf
                             + $"^0*BEGINJOB [ 0 () ]" + Constants.vbCrLf
-                            + $"^0*JOBPAR [ 2000 0 0 {GetDistanceBetweenDots(size, machineType)} 0 0 0 1 1 0 -1 () 1 1 55000 0 9 0 1 0 100 0 1 0]" + Constants.vbCrLf;
+                            + $"^0*JOBPAR [ {delay} 0 0 {GetDistanceBetweenDots(size, machineType)} 0 0 0 1 1 0 -1 () 1 1 55000 0 9 0 1 0 100 0 1 0]" + Constants.vbCrLf;
                     break;
                 case FontSizeEnum.ISO1_7x5:
                     message += "^0*BEGINLJSCRIPT [()]" + Constants.vbCrLf
                             + $"^0*JLPAR [ 90 1 0 3 1000 {rotation} 0 30000 00:00 0 30000 0 0 1000]" + Constants.vbCrLf
                             + $"^0*BEGINJOB [ 0 () ]" + Constants.vbCrLf
-                            + $"^0*JOBPAR [2000 0 0 {GetDistanceBetweenDots(size, machineType)} 0 0 0 1 1 0 -1 () 1 1 55000 0 16 0 1 0 100 0 1 0 ]" + Constants.vbCrLf;
+                            + $"^0*JOBPAR [ {delay} 0 0 {GetDistanceBetweenDots(size, machineType)} 0 0 0 1 1 0 -1 () 1 1 55000 0 16 0 1 0 100 0 1 0 ]" + Constants.vbCrLf;
                     break;
                 case FontSizeEnum.ISO1_9x7:
                     message += "^0*BEGINLJSCRIPT [()]" + Constants.vbCrLf
                             + $"^0*JLPAR [ 90 1 0 3 1000 {rotation} 0 30000 00:00 0 30000 0 0 1000]" + Constants.vbCrLf
                             + $"^0*BEGINJOB [ 0 () ]" + Constants.vbCrLf
-                            + $"^0*JOBPAR [ 2000 0 0 {GetDistanceBetweenDots(size, machineType)} 0 0 0 1 1 0 -1 () 1 1 55000 0 21 0 1 0 100 0 1 0 ]" + Constants.vbCrLf;
+                            + $"^0*JOBPAR [  {delay}  0 0 {GetDistanceBetweenDots(size, machineType)} 0 0 0 1 1 0 -1 () 1 1 55000 0 21 0 1 0 100 0 1 0 ]" + Constants.vbCrLf;
                     break;
                 default:
 
