@@ -661,6 +661,10 @@ namespace Aerotec.GUI
             {
                 DelayTextBox.Text = DelayTextBox.Text.Remove(DelayTextBox.Text.Length - 1);
             }
+            if (string.IsNullOrEmpty(DelayTextBox.Text))
+            {
+                DelayTextBox.Text = "0";
+            }
         }
     }
 }
