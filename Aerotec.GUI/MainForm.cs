@@ -410,7 +410,7 @@ namespace Aerotec.GUI
                     var formattedDate = currentDate.ToString("dd/MM/yyyy");
 
                     var anzahl = formattedDate + $" Anzahl Soll:{ExpectedQuantityTxtBox.Text} Ist:{CurrentQuantityTextBox.Text}";
-                    jet3UpClientService.StartWriting(2000, (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem, MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, anzahl);
+                    jet3UpClientService.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem, MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, anzahl);
                     sentFinal = true;
                     var Stand = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
                     //$"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand"
