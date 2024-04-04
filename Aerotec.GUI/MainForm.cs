@@ -1,8 +1,5 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
-
-
-
 using Aerotec.Data.Model;
 using Aerotec.Resources.Helper;
 using Aerotec.ViewModel;

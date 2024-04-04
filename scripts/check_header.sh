@@ -8,10 +8,11 @@ for file in *.cs; do
     # Check if the file exists and is readable
     if [[ -f "$file" && -r "$file" ]]; then
         # Read the first line of the file
-        first_line=$(head -n 1 "$file")
+        first_line=$(head -n 2 "$file")
         # Compare the first line with the expected header
         if [[ "$first_line" != "$EXPECTED_HEADER" ]]; then
             echo "Error: File '$file' does not have the expected header."
+            echo "$first_line"
             exit 1
         fi
     fi
