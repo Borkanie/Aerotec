@@ -1,13 +1,13 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using Aerotec.Data.Factories;
-using Aerotec.Data.Helper;
-using Aerotec.Data.Interface.Services;
+using AerotecInterfaces.Services;
 using Microsoft.VisualBasic;
-using System.Threading;
+using Jet3UpHelpers.Resources;
+using Jet3UpHelpers;
+using Jet3UpHelpers.Factories;
 
-namespace Aerotec.Data.Services
+namespace Jet3Up.Services.Mockup
 {
     public class TCPMockUpClient : IClientService
     {
@@ -28,15 +28,15 @@ namespace Aerotec.Data.Services
 
             if (e.Text.Contains("error"))
             {
-                Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Resources.Jet3UpStatusMessageType.Error, "error"));
+                Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Jet3UpStatusMessageType.Error, "error"));
                 return;
             }
             if (int.Parse(e.Text) > -1)
             {
-                Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Resources.Jet3UpStatusMessageType.Marked, e.Text));
+                Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Jet3UpStatusMessageType.Marked, e.Text));
                 return;
             }
-            Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Resources.Jet3UpStatusMessageType.Done, "done"));
+            Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Jet3UpStatusMessageType.Done, "done"));
         }
 
         public bool Connect(string Ip, int timeout)
@@ -94,6 +94,11 @@ namespace Aerotec.Data.Services
         public void SetCount(int Expected, int current)
         {
            
+        }
+
+        public void StopListening()
+        {
+            throw new NotImplementedException();
         }
     }
 }

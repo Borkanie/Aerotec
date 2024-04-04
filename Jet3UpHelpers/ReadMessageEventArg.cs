@@ -1,7 +1,7 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-namespace Aerotec.Data.Helper
+namespace Jet3UpHelpers
 {
     /// <summary>
     /// A message has been read from the fileinterface.Used in mockup.

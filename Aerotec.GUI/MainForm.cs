@@ -1,13 +1,14 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using Aerotec.Data.Helper;
-using Aerotec.Data.Interface.Services;
+
+
 using Aerotec.Data.Model;
-using Aerotec.Data.Resources;
-using Aerotec.Data.Services;
 using Aerotec.GUI.Resources.Helper;
 using Aerotec.GUI.ViewModel;
+using AerotecInterfaces.Services;
+using Jet3UpHelpers;
+using Jet3UpHelpers.Resources;
 using OfficeOpenXml;
 using System.Security.Cryptography.Xml;
 
@@ -84,9 +85,9 @@ namespace Aerotec.GUI
 
         private void Scannare_PreviewKey(object? sender, PreviewKeyDownEventArgs e)
         {
-
+#if DEBUG
             Log.WriteLine(e.KeyValue.ToString() + " " + e.KeyData);
-
+#endif
             //return;
             if (e.KeyValue == 13)
             {
@@ -175,17 +176,12 @@ namespace Aerotec.GUI
         /// </summary>
         private void StartJet3UpClient(LogInInformation logInInfo)
         {
-            if (Log.DEBUG)
-            {
-                jet3UpClientService = new TCPMockUpClient();
-            }
-            else
-            {
-                jet3UpClientService = new TCPClientService();
-            }
+            /*
+            jet3UpClientService = IoC.Container
             _ = jet3UpClientService.Connect(logInInfo.Address.ToString(), 3000);
             jet3UpClientService.Jet3UpMessageHendler += Jet3UpMessageHandler;
             jet3UpClientService.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
+        */
         }
 
         /// <summary>
@@ -214,9 +210,9 @@ namespace Aerotec.GUI
         /// </summary>
         private void Jet3UpClientService_Jet3UpCommunicationInterrupted(object? sender, Jet3UpCommunicationInterruptedErrorEventArgs e)
         {
-            if (jet3UpClientService is TCPClientService && e.ErrorWhenReading == false)
+            if (jet3UpClientService is IClientService && e.ErrorWhenReading == false)
             {
-                ((TCPClientService)jet3UpClientService).StopListening();
+                (jet3UpClientService).StopListening();
             }
             _ = MessageBox.Show(this, $"Eroare de comunicare cu aparatul procesul a fost intrerupt cu eroare \n{e.Exception.Message}", "Eroare de comunicare", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

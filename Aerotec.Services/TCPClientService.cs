@@ -1,14 +1,16 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using Aerotec.Data.Factories;
-using Aerotec.Data.Helper;
-using Aerotec.Data.Interface.Services;
+using AerotecInterfaces.Services;
+using Jet3UpHelpers.Factories;
+using Jet3UpHelpers;
 using Microsoft.VisualBasic;
 using System.Net.Sockets;
+using System.Resources;
 using System.Text;
+using Jet3UpHelpers.Resources;
 
-namespace Aerotec.Data.Services
+namespace Jet3Up.Services
 {
 
     /// <summary>
@@ -49,7 +51,7 @@ namespace Aerotec.Data.Services
         /// <inheritdoc/>
         public void Send(string text)
         {
-            Log.WriteLine(text);
+
             if (IsConnected())
             {
                 byte[] SENDBYTES = Encoding.ASCII.GetBytes(text + Constants.vbCrLf);
@@ -69,17 +71,17 @@ namespace Aerotec.Data.Services
         }
 
         /// <inheritdoc/>
-        public void StartWriting(int delay, FontSizeEnum size,int rotation,MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
+        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
         {
             this.expectedQuantity = expectedQuantity;
             string message;
             Send("^0!RC");
 
             var jet3upMessageBuilder = Jet3UpMessageBuilder.Start().Create();
-            
+
             if (anzahl == null)
             {
-                
+
                 message = jet3upMessageBuilder.SetSize(size, rotation, machine, delay).Write(HTZ, signature, ANR, BTIDX, controllerId).End();
             }
             else
@@ -154,8 +156,8 @@ namespace Aerotec.Data.Services
                         {
                             ContinueWriting();
                         }
-                        Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Resources.Jet3UpStatusMessageType.Marked, response.Split('C')[2].Split('\t')[0]));
-                        
+                        Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Jet3UpStatusMessageType.Marked, response.Split('C')[2].Split('\t')[0]));
+
                     }
 
                 }

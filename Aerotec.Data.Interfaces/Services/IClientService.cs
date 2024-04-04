@@ -1,9 +1,13 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using Aerotec.Data.Helper;
 
-namespace Aerotec.Data.Interface.Services
+// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
+using Jet3UpHelpers;
+
+namespace AerotecInterfaces.Services
 {
     /// <summary>
     /// The service controlling the machine.
@@ -70,12 +74,14 @@ namespace Aerotec.Data.Interface.Services
         /// An event that signals that the machine either became unresponsive or it forcefully closed or rejected a request.
         /// </summary>
         public event EventHandler<Jet3UpCommunicationInterruptedErrorEventArgs> Jet3UpCommunicationInterrupted;
-        
+
         /// <summary>
         /// Configures the printed quantity in the machine.
         /// </summary>
         /// <param name="expected">The quantity that needs to be printed.</param>
         /// <param name="current">The quantity that has been actually printed.</param>
-        public void SetCount(int expected,int current);
+        public void SetCount(int expected, int current);
+
+        public void StopListening();
     }
 }

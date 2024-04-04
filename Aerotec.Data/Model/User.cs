@@ -13,7 +13,8 @@ namespace Aerotec.Data.Model
             Id = "";
             Name = "";
         }
-        internal User(string name)
+
+        public User(string name)
         {
             Name = name;
         }

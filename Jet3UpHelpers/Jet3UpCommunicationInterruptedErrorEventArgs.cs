@@ -1,4 +1,4 @@
-﻿namespace Aerotec.Data.Helper
+﻿namespace Jet3UpHelpers
 {
     /// <summary>
     /// Communication interrupted event.

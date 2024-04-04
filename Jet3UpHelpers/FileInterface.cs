@@ -1,12 +1,12 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-namespace Aerotec.Data.Helper
+namespace Jet3UpHelpers
 {
     /// <summary>
     /// Interface used to mock machine interaction with file interaction from the disk.
     /// </summary>
-    internal class FileInterface
+    public class FileInterface
     {
         private readonly string inputPath = Environment.CurrentDirectory + "\\" + "jet3up.in";
         private readonly string outputPath = Environment.CurrentDirectory + "\\" + "jet3up.out";

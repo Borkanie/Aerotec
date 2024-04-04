@@ -1,10 +1,9 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using Aerotec.Data.Helper;
 using Microsoft.VisualBasic;
 
-namespace Aerotec.Data.Factories
+namespace Jet3UpHelpers.Factories
 {
     public class Jet3UpMessageBuilder
     {

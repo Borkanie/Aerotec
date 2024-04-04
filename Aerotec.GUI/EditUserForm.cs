@@ -1,4 +1,7 @@
 ﻿using Aerotec.Data.Model;
+using IoC;
+using Jet3UpInterfaces.Factories;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,7 +33,9 @@ namespace Aerotec
             if (File.Exists(jsonFilePath))
             {
                 string jsonData = File.ReadAllText(jsonFilePath);
-                people = JsonConvert.DeserializeObject<List<User>>(jsonData);
+
+                
+                //JsonConvert.DeserializeObject<List<User>>(jsonData);
             }
             else
             {

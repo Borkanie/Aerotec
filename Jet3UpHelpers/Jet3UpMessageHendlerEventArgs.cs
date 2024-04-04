@@ -1,9 +1,12 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using Aerotec.Data.Resources;
 
-namespace Aerotec.Data.Helper
+// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+using Jet3UpHelpers.Resources;
+
+namespace Jet3UpHelpers
 {
     /// <summary>
     /// Message from the machine.
