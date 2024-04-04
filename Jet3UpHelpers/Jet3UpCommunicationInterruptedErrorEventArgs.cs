@@ -1,4 +1,7 @@
-﻿namespace Jet3UpHelpers
+﻿// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
+namespace Jet3UpHelpers
 {
     /// <summary>
     /// Communication interrupted event.

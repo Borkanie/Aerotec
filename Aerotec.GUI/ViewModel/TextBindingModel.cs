@@ -1,6 +1,9 @@
-﻿using System.ComponentModel;
+﻿// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
 
-namespace Aerotec.GUI.ViewModel
+using System.ComponentModel;
+
+namespace Aerotec.ViewModel
 {
     /// <summary>
     /// A viewModel that allows property binding in winforms.

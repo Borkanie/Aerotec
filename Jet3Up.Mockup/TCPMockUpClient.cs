@@ -1,11 +1,11 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using AerotecInterfaces.Services;
-using Microsoft.VisualBasic;
-using Jet3UpHelpers.Resources;
 using Jet3UpHelpers;
 using Jet3UpHelpers.Factories;
+using Jet3UpHelpers.Resources;
+using Jet3UpInterfaces.Services;
+using Microsoft.VisualBasic;
 
 namespace Jet3Up.Services.Mockup
 {
@@ -61,7 +61,7 @@ namespace Jet3Up.Services.Mockup
 
         public void Send(string text)
         {
-            
+
             fileInterface.Write("Send method called with text: " + text);
         }
 
@@ -93,7 +93,7 @@ namespace Jet3Up.Services.Mockup
 
         public void SetCount(int Expected, int current)
         {
-           
+
         }
 
         public void StopListening()

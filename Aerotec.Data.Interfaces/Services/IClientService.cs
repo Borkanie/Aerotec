@@ -5,9 +5,17 @@
 // Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
+
+// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
+
+// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
 using Jet3UpHelpers;
 
-namespace AerotecInterfaces.Services
+namespace Jet3UpInterfaces.Services
 {
     /// <summary>
     /// The service controlling the machine.

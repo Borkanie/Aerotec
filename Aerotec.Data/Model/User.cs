@@ -23,7 +23,7 @@ namespace Aerotec.Data.Model
         /// The Identifier of the controller (A 000).
         /// </summary>
         public string Id { get; set; }
-        
+
         /// <summary>
         /// Display name of the controller.
         /// </summary>

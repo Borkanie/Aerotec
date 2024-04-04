@@ -1,10 +1,8 @@
-﻿using Aerotec.Data.Model;
+﻿// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
+using Aerotec.Data.Model;
 using Jet3UpInterfaces.Factories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jet3Up.Services.Mockup
 {

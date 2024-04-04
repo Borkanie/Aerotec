@@ -1,9 +1,7 @@
-﻿using Aerotec.Data.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
+using Aerotec.Data.Model;
 
 namespace Jet3UpInterfaces.Factories
 {

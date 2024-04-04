@@ -1,11 +1,11 @@
+// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
 using Aerotec.Data.Model;
 using IoC;
 using Jet3Up.Services;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Net;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Aerotec.GUI
 {
@@ -69,7 +69,7 @@ namespace Aerotec.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Eroare de conectare la masina \n{ex.Message}", "Eroare conectare", MessageBoxButtons.OK);
+                _ = MessageBox.Show($"Eroare de conectare la masina \n{ex.Message}", "Eroare conectare", MessageBoxButtons.OK);
             }
 
         }

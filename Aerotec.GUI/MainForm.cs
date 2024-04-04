@@ -4,13 +4,12 @@
 
 
 using Aerotec.Data.Model;
-using Aerotec.GUI.Resources.Helper;
-using Aerotec.GUI.ViewModel;
-using AerotecInterfaces.Services;
+using Aerotec.Resources.Helper;
+using Aerotec.ViewModel;
 using Jet3UpHelpers;
 using Jet3UpHelpers.Resources;
+using Jet3UpInterfaces.Services;
 using OfficeOpenXml;
-using System.Security.Cryptography.Xml;
 
 namespace Aerotec.GUI
 {
@@ -91,22 +90,22 @@ namespace Aerotec.GUI
             {
                 if (sender == ANRTextBox)
                 {
-                    HTZTextBox.Focus();
+                    _ = HTZTextBox.Focus();
                     return;
                 }
                 if (sender == HTZTextBox)
                 {
-                    BTIDTextBox.Focus();
+                    _ = BTIDTextBox.Focus();
                     return;
                 }
                 if (sender == BTIDTextBox)
                 {
-                    ExpectedQuantityTxtBox.Focus();
+                    _ = ExpectedQuantityTxtBox.Focus();
                     return;
                 }
                 if (sender == ExpectedQuantityTxtBox)
                 {
-                    ANRTextBox.Focus();
+                    _ = ANRTextBox.Focus();
                     return;
                 }
             }
@@ -210,7 +209,7 @@ namespace Aerotec.GUI
         {
             if (jet3UpClientService is IClientService && e.ErrorWhenReading == false)
             {
-                (jet3UpClientService).StopListening();
+                jet3UpClientService.StopListening();
             }
             _ = MessageBox.Show(this, $"Eroare de comunicare cu aparatul procesul a fost intrerupt cu eroare \n{e.Exception.Message}", "Eroare de comunicare", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -259,7 +258,8 @@ namespace Aerotec.GUI
             }
             else
             {
-                if (expected != 0 && !String.IsNullOrEmpty(CurrentQuantityTextBox.Text))                {
+                if (expected != 0 && !String.IsNullOrEmpty(CurrentQuantityTextBox.Text))
+                {
                     _ = MessageBox.Show("Caractere gresite in casuta cu numarul de piese din comanda sau cu numarul actual de peise printate", "Caracter Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
@@ -406,7 +406,7 @@ namespace Aerotec.GUI
                     var anzahl = formattedDate + $" Anzahl Soll:{ExpectedQuantityTxtBox.Text} Ist:{CurrentQuantityTextBox.Text}";
                     jet3UpClientService.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem, MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, anzahl);
                     sentFinal = true;
-                    var Stand = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
+                    _ = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
                     //$"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand"
 
                     var fertig = (ExpectedQuantityTxtBox.Text == CurrentQuantityTextBox.Text) ? "fertig" : "Nicht fertig";
@@ -428,7 +428,7 @@ namespace Aerotec.GUI
                 // Check if the directory exists, and if not, create it
                 if (!Directory.Exists(imprimareFolderPath))
                 {
-                    Directory.CreateDirectory(imprimareFolderPath);
+                    _ = Directory.CreateDirectory(imprimareFolderPath);
                 }
 
                 string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
@@ -473,7 +473,7 @@ namespace Aerotec.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                _ = MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
 
@@ -488,7 +488,7 @@ namespace Aerotec.GUI
                 // Check if the directory exists, and if not, create it
                 if (!Directory.Exists(imprimareFolderPath))
                 {
-                    Directory.CreateDirectory(imprimareFolderPath);
+                    _ = Directory.CreateDirectory(imprimareFolderPath);
                 }
 
                 string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
@@ -514,7 +514,7 @@ namespace Aerotec.GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                _ = MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
 
@@ -603,7 +603,7 @@ namespace Aerotec.GUI
                         return;
                     }
                 }
-                jet3UpClientService.StartWriting(   int.Parse(DelayTextBox.Text),
+                jet3UpClientService.StartWriting(int.Parse(DelayTextBox.Text),
                                                     (FontSizeEnum)SizeComboBox.SelectedItem,
                                                     (int)ComboBoxRotation.SelectedItem,
                                                     (MachineTypeEnum)ComboBoxMachine.SelectedItem,
@@ -614,7 +614,7 @@ namespace Aerotec.GUI
                                                     ControllerIdTextBox.Text,
                                                     int.Parse(ExpectedQuantityTxtBox.Text),
                                                     null);
-                if(!CurrentQuantityTextBox.Text.Equals("0"))
+                if (!CurrentQuantityTextBox.Text.Equals("0"))
                 {
                     jet3UpClientService.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text));
                 }

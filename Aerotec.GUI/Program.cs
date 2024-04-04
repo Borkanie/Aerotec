@@ -1,7 +1,9 @@
 // Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-namespace Aerotec.GUI
+using Aerotec.GUI;
+
+namespace Aerotec
 {
     internal static class Program
     {

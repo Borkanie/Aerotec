@@ -1,14 +1,13 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
 
-using AerotecInterfaces.Services;
-using Jet3UpHelpers.Factories;
 using Jet3UpHelpers;
+using Jet3UpHelpers.Factories;
+using Jet3UpHelpers.Resources;
+using Jet3UpInterfaces.Services;
 using Microsoft.VisualBasic;
 using System.Net.Sockets;
-using System.Resources;
 using System.Text;
-using Jet3UpHelpers.Resources;
 
 namespace Jet3Up.Services
 {

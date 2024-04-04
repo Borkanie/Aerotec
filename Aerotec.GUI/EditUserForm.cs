@@ -1,17 +1,10 @@
-﻿using Aerotec.Data.Model;
+﻿// Copyrigth (c) S.C.SoftLab S.R.L.
+// All Rigths reserved.
+
+using Aerotec.Data.Model;
 using IoC;
 using Jet3UpInterfaces.Factories;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Aerotec
 {
@@ -33,8 +26,8 @@ namespace Aerotec
             IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().RevertChanges();
             dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserContainer>();
         }
-            
-    
+
+
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
@@ -42,12 +35,12 @@ namespace Aerotec
             {
                 if (string.IsNullOrEmpty(people[i].Id) || string.IsNullOrEmpty(people[i].Name))
                 {
-                    MessageBox.Show("Nu puteti alsa campuri incomplete.");
+                    _ = MessageBox.Show("Nu puteti alsa campuri incomplete.");
                     return;
                 }
             }
             IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().SaveChanges();
-            MessageBox.Show("Lista de controllori a fost updatata!");
+            _ = MessageBox.Show("Lista de controllori a fost updatata!");
 
             Close();
         }

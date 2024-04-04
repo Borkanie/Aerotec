@@ -14,7 +14,7 @@ namespace Jet3UpHelpers.Factories
 
         private Jet3UpMessageBuilder()
         {
-            
+
         }
 
         public static Jet3UpMessageBuilder Start()
@@ -60,7 +60,7 @@ namespace Jet3UpHelpers.Factories
 
         private string GetBold(FontSizeEnum size, MachineTypeEnum machineType)
         {
-            switch(machineType)
+            switch (machineType)
             {
                 case MachineTypeEnum.Alba:
                     switch (size)
@@ -90,7 +90,7 @@ namespace Jet3UpHelpers.Factories
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(machineType));
-            }            
+            }
         }
 
         public Jet3UpMessageBuilder Write(string HTZ, string signature, string ANR, string BTIDX, string controllerId)
@@ -98,7 +98,7 @@ namespace Jet3UpHelpers.Factories
             var location = GetLocation(size, machineType);
             switch (size)
             {
-                
+
                 case FontSizeEnum.ISO1_5x3:
                     message += $"^0*OBJ [1 {location[0]} 11 0 (ISO1_7x5)  ({HTZ} ) 1 0 0 0 0 {GetBold(size, machineType)} 0 0 0 0 ()  () 0 0 ()]" + Constants.vbCrLf
                             + $"^0*OBJ [2 {location[1]} 11 0 (ISO1_7x5)  ({signature}) 1 0 0 0 0 {GetBold(size, machineType)} 0 0 0 0 ()  () 0 0 ()]" + Constants.vbCrLf
@@ -214,11 +214,11 @@ namespace Jet3UpHelpers.Factories
         /// <param name="encoderSpeed"></param>
         /// <param name="encoderResolution"></param>
         /// <returns></returns>
-        public Jet3UpMessageBuilder SetSize(FontSizeEnum size,int rotation, MachineTypeEnum machineType, int delay = 2000, int printGoSignal = 0, int encoderSignal = 0, int encoderSpeed = 10, int encoderResolution = 700)
+        public Jet3UpMessageBuilder SetSize(FontSizeEnum size, int rotation, MachineTypeEnum machineType, int delay = 2000, int printGoSignal = 0, int encoderSignal = 0, int encoderSpeed = 10, int encoderResolution = 700)
         {
             this.size = size;
             this.machineType = machineType;
-            var mirrored = machineType == MachineTypeEnum.Alba ? 0 : 1;
+            _ = machineType == MachineTypeEnum.Alba ? 0 : 1;
             switch (size)
             {
                 case FontSizeEnum.ISO1_5x3:
@@ -250,7 +250,7 @@ namespace Jet3UpHelpers.Factories
         public Jet3UpMessageBuilder Create()
         {
             message += "";
-                //"^0*ENDJOB []{Constants.vbCrLf}^0*ENDLJSCRIPT []" + Constants.vbCrLf;
+            //"^0*ENDJOB []{Constants.vbCrLf}^0*ENDLJSCRIPT []" + Constants.vbCrLf;
             return this;
         }
 
