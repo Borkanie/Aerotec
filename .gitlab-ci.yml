@@ -29,7 +29,7 @@ check-job:       # This job runs in the build stage, which runs first.
   stage: filecheck
   script:
     - echo "Checks for header on all files started"
-    - scripts/check_header.sh 
+    - bash scripts/check_header.sh 
     - echo "All headers are correct"
    
 build-job:       # This job runs in the build stage, which runs first.
@@ -63,5 +63,4 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - echo "Deploying application..."
-    - 
     - echo "Application successfully deployed."
