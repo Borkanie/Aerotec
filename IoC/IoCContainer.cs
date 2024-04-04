@@ -24,11 +24,9 @@ namespace IoC
 #if !DEBUG
             builder.Services.AddSingleton<IClientService, TCPClientService>();
             builder.Services.AddSingleton<IUserFactory, UserFactory>();
-            builder.Services.AddSingleton<IUserContainer, UserContianer>();
 #else
             builder.Services.AddSingleton<IClientService, TCPMockUpClient>();
             builder.Services.AddSingleton<IUserFactory, UserFactoryMockup>();
-            builder.Services.AddSingleton<IUserContainer, UserContianerMock>();
 
 #endif
             IHost host = builder.Build();

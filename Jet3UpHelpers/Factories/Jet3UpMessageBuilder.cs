@@ -5,6 +5,9 @@ using Microsoft.VisualBasic;
 
 namespace Jet3UpHelpers.Factories
 {
+    /// <summary>
+    /// Creates messages for Jet3Up.
+    /// </summary>
     public class Jet3UpMessageBuilder
     {
         private static Jet3UpMessageBuilder instance;
@@ -12,18 +15,31 @@ namespace Jet3UpHelpers.Factories
         private MachineTypeEnum machineType;
         private string message = "";
 
+        // Constructor is private to ensure Singleton.
         private Jet3UpMessageBuilder()
         {
 
         }
 
+        /// <summary>
+        /// Starts the <see cref="Jet3UpMessageBuilder"/> instance.
+        /// </summary>
+        /// <returns>An instance of a <see cref="Jet3UpMessageBuilder"/>.</returns>
         public static Jet3UpMessageBuilder Start()
         {
-            instance = new Jet3UpMessageBuilder();
+            if(instance == null)
+                instance = new Jet3UpMessageBuilder();
             return instance;
         }
 
-        private int[] GetLocation(FontSizeEnum size, MachineTypeEnum machineType)
+        /// <summary>
+        /// Sets up location for the machine dependeing of the Ink color and expected machine type.
+        /// </summary>
+        /// <param name="size">The <see cref="FontSizeEnum"/> used by the printer.</param>
+        /// <param name="machineType">The <see cref="MachineTypeEnum"/> of the Ink.</param>
+        /// <returns>Coordinates, and distance between dots.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        private int[] Setlocation(FontSizeEnum size, MachineTypeEnum machineType)
         {
             switch (machineType)
             {
@@ -58,6 +74,13 @@ namespace Jet3UpHelpers.Factories
             }
         }
 
+        /// <summary>
+        /// Selects the correct bold based on the <see cref="FontSizeEnum"/> and the <see cref="MachineTypeEnum"/>.
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="machineType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private string GetBold(FontSizeEnum size, MachineTypeEnum machineType)
         {
             switch (machineType)
@@ -93,9 +116,18 @@ namespace Jet3UpHelpers.Factories
             }
         }
 
+        /// <summary>
+        /// Writes the basic message stirng that will be send to the machine.
+        /// </summary>
+        /// <param name="HTZ"></param>
+        /// <param name="signature"></param>
+        /// <param name="ANR"></param>
+        /// <param name="BTIDX"></param>
+        /// <param name="controllerId"></param>
+        /// <returns></returns>
         public Jet3UpMessageBuilder Write(string HTZ, string signature, string ANR, string BTIDX, string controllerId)
         {
-            var location = GetLocation(size, machineType);
+            var location = Setlocation(size, machineType);
             switch (size)
             {
 
@@ -128,9 +160,19 @@ namespace Jet3UpHelpers.Factories
             return this;
         }
 
+        /// <summary>
+        /// Writes the final message to the machine. It has a final string.
+        /// </summary>
+        /// <param name="HTZ"></param>
+        /// <param name="signature"></param>
+        /// <param name="ANR"></param>
+        /// <param name="BTIDX"></param>
+        /// <param name="controllerId"></param>
+        /// <param name="final"></param>
+        /// <returns></returns>
         public Jet3UpMessageBuilder Write(string HTZ, string signature, string ANR, string BTIDX, string controllerId, string final)
         {
-            var location = GetLocation(size, machineType);
+            var location = Setlocation(size, machineType);
             switch (size)
             {
                 case FontSizeEnum.ISO1_5x3:
@@ -167,6 +209,13 @@ namespace Jet3UpHelpers.Factories
             return this;
         }
 
+        /// <summary>
+        /// Set's up the distance between Dots based on the font size and Ink type.
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="machineType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private string GetDistanceBetweenDots(FontSizeEnum size, MachineTypeEnum machineType)
         {
             switch (machineType)
@@ -203,7 +252,7 @@ namespace Jet3UpHelpers.Factories
         }
 
         /// <summary>
-        /// 
+        /// Sends to the Machine a message with the job properties for a given font size and ink type.
         /// </summary>
         /// <param name="delay">Print go delay in micro meters</param>
         /// <param name="size"></param>
@@ -247,6 +296,10 @@ namespace Jet3UpHelpers.Factories
 
         }
 
+        /// <summary>
+        /// Starts creating a message form scratch.
+        /// </summary>
+        /// <returns></returns>
         public Jet3UpMessageBuilder Create()
         {
             message += "";
@@ -254,6 +307,10 @@ namespace Jet3UpHelpers.Factories
             return this;
         }
 
+        /// <summary>
+        /// Adds the Endjob command to the message.
+        /// </summary>
+        /// <returns></returns>
         public string End()
         {
             message += "^0*ENDJOB []" + Constants.vbCrLf

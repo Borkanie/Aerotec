@@ -13,7 +13,7 @@ namespace Aerotec
     /// </summary>
     public partial class EditUserForm : Form
     {
-        private IUserContainer people;
+        private List<User> people;
         public EditUserForm()
         {
             InitializeComponent();
@@ -24,10 +24,8 @@ namespace Aerotec
             // Load the JSON data from the file
             //string jsonFilePath = "Resources/Controllers.json";
             IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().RevertChanges();
-            dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserContainer>();
+            dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
         }
-
-
 
         private void SaveButton_Click(object sender, EventArgs e)
         {

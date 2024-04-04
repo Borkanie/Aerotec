@@ -5,6 +5,9 @@ using Aerotec.Data.Model;
 
 namespace Jet3UpInterfaces.Factories
 {
+    /// <summary>
+    /// A factory allowing the user interaction with <see cref="IUserContainer"/>
+    /// </summary>
     public interface IUserFactory
     {
         /// <summary>
@@ -13,19 +16,22 @@ namespace Jet3UpInterfaces.Factories
         /// <returns></returns>
         void RevertChanges();
 
-        void SaveChanges();
-
         /// <summary>
-        /// Returns all the <see cref="User"/> from currently enrolled.
+        /// Save the changes done to the <see cref="User"/> to the database.
         /// </summary>
-        /// <returns></returns>
-        IUserContainer GetUsers();
+        void SaveChanges();
 
         /// <summary>
         /// Returns the names of all the <see cref="User"/> from the system.
         /// </summary>
         /// <returns></returns>
         List<string> GetUserNames();
+
+        /// <summary>
+        /// Returns all the <see cref="User"/> from the system.
+        /// </summary>
+        /// <returns></returns>
+        List<User> GetUsers();
 
         /// <summary>
         /// Creates a new empty <see cref="User"/>.

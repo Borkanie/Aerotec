@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Jet3Up.Services
 {
-
     /// <summary>
     /// This implementation needs a machine to connect to in order to work. 
     /// <inheritdoc cref="IClientService"/>

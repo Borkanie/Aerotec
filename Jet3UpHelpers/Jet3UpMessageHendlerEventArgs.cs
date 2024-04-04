@@ -1,9 +1,5 @@
 ﻿// Copyrigth (c) S.C.SoftLab S.R.L.
 // All Rigths reserved.
-
-
-// Copyrigth (c) S.C.SoftLab S.R.L.
-// All Rigths reserved.
 using Jet3UpHelpers.Resources;
 
 namespace Jet3UpHelpers

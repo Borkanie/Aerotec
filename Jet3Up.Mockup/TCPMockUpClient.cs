@@ -9,6 +9,7 @@ using Microsoft.VisualBasic;
 
 namespace Jet3Up.Services.Mockup
 {
+    /// <inheritdoc/>
     public class TCPMockUpClient : IClientService
     {
         private TCPMockUpClient tcpMockUpClient;
@@ -17,12 +18,14 @@ namespace Jet3Up.Services.Mockup
         public event EventHandler<Jet3UpMessageHendlerEventArgs> Jet3UpMessageHendler;
         public event EventHandler<Jet3UpCommunicationInterruptedErrorEventArgs> Jet3UpCommunicationInterrupted;
 
+        /// <inheritdoc/>
         public TCPMockUpClient()
         {
             fileInterface = new FileInterface();
             fileInterface.TextReaderEvent += FileInterface_TextReaderEvent;
         }
 
+        /// <inheritdoc/>
         private void FileInterface_TextReaderEvent(object? sender, ReadMessageEventArg e)
         {
 
@@ -39,6 +42,7 @@ namespace Jet3Up.Services.Mockup
             Jet3UpMessageHendler?.Invoke(this, new Jet3UpMessageHendlerEventArgs(Jet3UpStatusMessageType.Done, "done"));
         }
 
+        /// <inheritdoc/>
         public bool Connect(string Ip, int timeout)
         {
             if (tcpMockUpClient == null)
@@ -47,24 +51,28 @@ namespace Jet3Up.Services.Mockup
             return true;
         }
 
+        /// <inheritdoc/>
         public void ContinueWriting()
         {
             fileInterface.Write("ContinueWriting method called");
             Send("^0!GO");
         }
 
+        /// <inheritdoc/>
         public bool IsConnected()
         {
             fileInterface.Write("IsConnected method called");
             return true;
         }
 
+        /// <inheritdoc/>
         public void Send(string text)
         {
 
             fileInterface.Write("Send method called with text: " + text);
         }
 
+        /// <inheritdoc/>
         public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
         {
             string message;
@@ -84,6 +92,7 @@ namespace Jet3Up.Services.Mockup
             fileInterface.StartReading(expectedQuantity);
         }
 
+        /// <inheritdoc/>
         public void StopCommand()
         {
             fileInterface.StopReading();
@@ -91,11 +100,13 @@ namespace Jet3Up.Services.Mockup
             Send("^0!ST");
         }
 
+        /// <inheritdoc/>
         public void SetCount(int Expected, int current)
         {
 
         }
 
+        /// <inheritdoc/>
         public void StopListening()
         {
             throw new NotImplementedException();
