@@ -1,4 +1,5 @@
 ﻿
+using Aerotec.Data.Model;
 using AerotecInterfaces.Services;
 using Jet3Up.Services;
 using Jet3Up.Services.Mockup;
@@ -21,9 +22,11 @@ namespace IoC
 #if !DEBUG
             builder.Services.AddSingleton<IClientService, TCPClientService>();
             builder.Services.AddSingleton<IUserFactory, UserFactory>();
+            builder.Services.AddSingleton<IUserContainer, UserContianer>();
 #else
             builder.Services.AddSingleton<IClientService, TCPMockUpClient>();
             builder.Services.AddSingleton<IUserFactory, UserFactoryMockup>();
+            builder.Services.AddSingleton<IUserContainer, UserContianerMock>();
             
 #endif
             IHost host = builder.Build();

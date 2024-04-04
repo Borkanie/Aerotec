@@ -52,8 +52,17 @@ namespace Jet3Up.Services.Mockup
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
-        public List<User> RefreshUsersFromHard()
+        public void RevertChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        IUserContainer IUserFactory.GetUsers()
         {
             throw new NotImplementedException();
         }

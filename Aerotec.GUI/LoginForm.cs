@@ -1,5 +1,7 @@
-using Aerotec.Data.Factories;
 using Aerotec.Data.Model;
+using IoC;
+using Jet3Up.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net;
 using System.Windows.Forms;
@@ -34,7 +36,7 @@ namespace Aerotec.GUI
         private void RefreshComboboxInput()
         {
             // Initialize the ComboBox with some initial data (if needed)
-            comboBoxNames = UserFactory.GetUserNames();
+            comboBoxNames = IoCContainer.Instance.Services.GetRequiredService<UserFactory>().GetUserNames();
 
             // Assign the DataSource
             LoginUserComboBox.DataSource = comboBoxNames;
@@ -58,7 +60,7 @@ namespace Aerotec.GUI
             try
             {
                 var logInInfo = new LogInInformation(
-                UserFactory.GetUsers().First(x => string.Equals(x.Name, LoginUserComboBox.SelectedItem.ToString())),
+                    IoCContainer.Instance.Services.GetRequiredService<UserFactory>().GetUsers().First(x => string.Equals(x.Name, LoginUserComboBox.SelectedItem.ToString())),
                 LogInIPTextBox.Text);
                 var mainForm = new MainForm(logInInfo);
                 mainForm.FormClosed += MainForm_FormClosed;

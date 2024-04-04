@@ -20,7 +20,7 @@ namespace Aerotec
     /// </summary>
     public partial class EditUserForm : Form
     {
-        private List<User> people;
+        private IUserContainer people;
         public EditUserForm()
         {
             InitializeComponent();
@@ -29,22 +29,12 @@ namespace Aerotec
         private void EditUserForm_Load(object sender, EventArgs e)
         {
             // Load the JSON data from the file
-            string jsonFilePath = "Resources/Controllers.json";
-            if (File.Exists(jsonFilePath))
-            {
-                string jsonData = File.ReadAllText(jsonFilePath);
-
-                
-                //JsonConvert.DeserializeObject<List<User>>(jsonData);
-            }
-            else
-            {
-                people = new List<User>();
-            }
-
-            // Bind the DataGridView to the list of people
-            dataGridView1.DataSource = people;
+            //string jsonFilePath = "Resources/Controllers.json";
+            IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().RevertChanges();
+            dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserContainer>();
         }
+            
+    
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
@@ -56,10 +46,7 @@ namespace Aerotec
                     return;
                 }
             }
-            // Serialize the list of people back to JSON
-            string jsonData = JsonConvert.SerializeObject(people, Formatting.Indented);
-            File.WriteAllText("Resources/Controllers.json", jsonData);
-
+            IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().SaveChanges();
             MessageBox.Show("Lista de controllori a fost updatata!");
 
             Close();
@@ -73,7 +60,7 @@ namespace Aerotec
         private void btnAdd_Click(object sender, EventArgs e)
         {
             // Add a new empty person to the list and refresh the DataGridView
-            people.Add(new User());
+            people.Add(IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().Create("Utilizator nou"));
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = people;
         }

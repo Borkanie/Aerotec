@@ -85,9 +85,7 @@ namespace Aerotec.GUI
 
         private void Scannare_PreviewKey(object? sender, PreviewKeyDownEventArgs e)
         {
-#if DEBUG
-            Log.WriteLine(e.KeyValue.ToString() + " " + e.KeyData);
-#endif
+
             //return;
             if (e.KeyValue == 13)
             {

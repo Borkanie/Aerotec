@@ -13,13 +13,15 @@ namespace Jet3UpInterfaces.Factories
         /// Get's a list of all the <see cref="User"/> from the json file.
         /// </summary>
         /// <returns></returns>
-        List<User> RefreshUsersFromHard();
+        void RevertChanges();
+
+        void SaveChanges();
 
         /// <summary>
         /// Returns all the <see cref="User"/> from currently enrolled.
         /// </summary>
         /// <returns></returns>
-        List<User> GetUsers();
+        IUserContainer GetUsers();
 
         /// <summary>
         /// Returns the names of all the <see cref="User"/> from the system.

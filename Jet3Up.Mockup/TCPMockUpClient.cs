@@ -61,7 +61,7 @@ namespace Jet3Up.Services.Mockup
 
         public void Send(string text)
         {
-            Log.WriteLine(text);
+            
             fileInterface.Write("Send method called with text: " + text);
         }
 
