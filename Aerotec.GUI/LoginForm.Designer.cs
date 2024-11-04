@@ -120,7 +120,6 @@ namespace Aerotec.GUI
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoginForm";
             Text = "Login";
-            Load += LoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

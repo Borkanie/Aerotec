@@ -47,7 +47,7 @@ namespace Aerotec.GUI
             label1 = new Label();
             ControllerIdTextBox = new TextBox();
             ControllerTextBox = new TextBox();
-            groupBox3 = new GroupBox();
+            ComandaDeLucruBox = new GroupBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
@@ -69,12 +69,17 @@ namespace Aerotec.GUI
             pictureBox2 = new PictureBox();
             StartStopButton = new Button();
             ContactButton = new Button();
+            AdvancedOptionsBox = new GroupBox();
+            label16 = new Label();
+            EncoderResolutionTexbBox = new TextBox();
+            advancedoptionsButton = new Button();
             INFORMATI.SuspendLayout();
             groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
+            ComandaDeLucruBox.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            AdvancedOptionsBox.SuspendLayout();
             SuspendLayout();
             // 
             // INFORMATI
@@ -234,22 +239,22 @@ namespace Aerotec.GUI
             ControllerTextBox.Size = new Size(158, 27);
             ControllerTextBox.TabIndex = 3;
             // 
-            // groupBox3
+            // ComandaDeLucruBox
             // 
-            groupBox3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            groupBox3.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            groupBox3.Controls.Add(label5);
-            groupBox3.Controls.Add(label4);
-            groupBox3.Controls.Add(label3);
-            groupBox3.Controls.Add(BTIDTextBox);
-            groupBox3.Controls.Add(HTZTextBox);
-            groupBox3.Controls.Add(ANRTextBox);
-            groupBox3.Location = new Point(27, 299);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(332, 139);
-            groupBox3.TabIndex = 2;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "COMANDA DE LUCRU";
+            ComandaDeLucruBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            ComandaDeLucruBox.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ComandaDeLucruBox.Controls.Add(label5);
+            ComandaDeLucruBox.Controls.Add(label4);
+            ComandaDeLucruBox.Controls.Add(label3);
+            ComandaDeLucruBox.Controls.Add(BTIDTextBox);
+            ComandaDeLucruBox.Controls.Add(HTZTextBox);
+            ComandaDeLucruBox.Controls.Add(ANRTextBox);
+            ComandaDeLucruBox.Location = new Point(27, 299);
+            ComandaDeLucruBox.Name = "ComandaDeLucruBox";
+            ComandaDeLucruBox.Size = new Size(332, 139);
+            ComandaDeLucruBox.TabIndex = 2;
+            ComandaDeLucruBox.TabStop = false;
+            ComandaDeLucruBox.Text = "COMANDA DE LUCRU";
             // 
             // label5
             // 
@@ -349,7 +354,6 @@ namespace Aerotec.GUI
             label10.Size = new Size(138, 17);
             label10.TabIndex = 14;
             label10.Text = "DELAY(micrometri):";
-            label10.Click += label10_Click;
             // 
             // DelayTextBox
             // 
@@ -402,7 +406,6 @@ namespace Aerotec.GUI
             CurrentQuantityTextBox.Size = new Size(151, 27);
             CurrentQuantityTextBox.TabIndex = 9;
             CurrentQuantityTextBox.Text = "0";
-            CurrentQuantityTextBox.TextChanged += CurrentQuantityTextBox_TextChanged;
             // 
             // SizeComboBox
             // 
@@ -421,7 +424,6 @@ namespace Aerotec.GUI
             ExpectedQuantityTxtBox.Size = new Size(151, 27);
             ExpectedQuantityTxtBox.TabIndex = 7;
             ExpectedQuantityTxtBox.Text = "0";
-            ExpectedQuantityTxtBox.TextChanged += ExpectedQuantityTxtBox_TextChanged;
             ExpectedQuantityTxtBox.KeyPress += ExpectedQuantityTxtBox_KeyPress;
             // 
             // label7
@@ -477,17 +479,63 @@ namespace Aerotec.GUI
             ContactButton.UseVisualStyleBackColor = true;
             ContactButton.Click += ContactButton_Click;
             // 
+            // AdvancedOptionsBox
+            // 
+            AdvancedOptionsBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AdvancedOptionsBox.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AdvancedOptionsBox.Controls.Add(label16);
+            AdvancedOptionsBox.Controls.Add(EncoderResolutionTexbBox);
+            AdvancedOptionsBox.Location = new Point(27, 299);
+            AdvancedOptionsBox.Name = "AdvancedOptionsBox";
+            AdvancedOptionsBox.Size = new Size(351, 155);
+            AdvancedOptionsBox.TabIndex = 10;
+            AdvancedOptionsBox.TabStop = false;
+            AdvancedOptionsBox.Text = "Optiuni Avansate";
+            // 
+            // label16
+            // 
+            label16.Anchor = AnchorStyles.Left;
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.Location = new Point(14, 61);
+            label16.Name = "label16";
+            label16.Size = new Size(164, 20);
+            label16.TabIndex = 7;
+            label16.Text = "RESOLUTIE ENCODER:";
+            // 
+            // EncoderResolutionTexbBox
+            // 
+            EncoderResolutionTexbBox.Anchor = AnchorStyles.Right;
+            EncoderResolutionTexbBox.Location = new Point(194, 58);
+            EncoderResolutionTexbBox.Name = "EncoderResolutionTexbBox";
+            EncoderResolutionTexbBox.Size = new Size(133, 27);
+            EncoderResolutionTexbBox.TabIndex = 4;
+            EncoderResolutionTexbBox.Text = "30";
+            // 
+            // advancedoptionsButton
+            // 
+            advancedoptionsButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            advancedoptionsButton.Location = new Point(0, 317);
+            advancedoptionsButton.Name = "advancedoptionsButton";
+            advancedoptionsButton.Size = new Size(29, 34);
+            advancedoptionsButton.TabIndex = 11;
+            advancedoptionsButton.Text = "+";
+            advancedoptionsButton.UseVisualStyleBackColor = true;
+            advancedoptionsButton.Click += advancedoptionsButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 458);
+            Controls.Add(advancedoptionsButton);
+            Controls.Add(AdvancedOptionsBox);
             Controls.Add(ContactButton);
             Controls.Add(StartStopButton);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(groupBox4);
-            Controls.Add(groupBox3);
+            Controls.Add(ComandaDeLucruBox);
             Controls.Add(groupBox2);
             Controls.Add(INFORMATI);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -497,12 +545,14 @@ namespace Aerotec.GUI
             INFORMATI.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
+            ComandaDeLucruBox.ResumeLayout(false);
+            ComandaDeLucruBox.PerformLayout();
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            AdvancedOptionsBox.ResumeLayout(false);
+            AdvancedOptionsBox.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -519,7 +569,7 @@ namespace Aerotec.GUI
         private Label label1;
         private TextBox ControllerIdTextBox;
         private TextBox ControllerTextBox;
-        private GroupBox groupBox3;
+        private GroupBox ComandaDeLucruBox;
         private TextBox ANRTextBox;
         private Label label3;
         private TextBox BTIDTextBox;
@@ -545,5 +595,9 @@ namespace Aerotec.GUI
         private Button ButtonIncreaseCurrentCount;
         private Label label10;
         private TextBox DelayTextBox;
+        private GroupBox AdvancedOptionsBox;
+        private Label label16;
+        private TextBox EncoderResolutionTexbBox;
+        private Button advancedoptionsButton;
     }
 }

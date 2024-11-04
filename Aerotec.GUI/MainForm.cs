@@ -3,9 +3,11 @@
 using Aerotec.Data.Model;
 using Aerotec.Resources.Helper;
 using Aerotec.ViewModel;
+using IoC;
 using Jet3UpHelpers;
 using Jet3UpHelpers.Resources;
 using Jet3UpInterfaces.Services;
+using Microsoft.Extensions.DependencyInjection;
 using OfficeOpenXml;
 
 namespace Aerotec.GUI
@@ -15,6 +17,7 @@ namespace Aerotec.GUI
     /// </summary>
     public partial class MainForm : Form
     {
+        #region fields
         private IClientService jet3UpClientService;
         private bool working = false;
         private ContactForm contactForm;
@@ -33,6 +36,7 @@ namespace Aerotec.GUI
                 180,
                 270
             };
+        #endregion
 
         public MainForm(LogInInformation logInInfo)
         {
@@ -77,6 +81,8 @@ namespace Aerotec.GUI
             _ = DataANRTextBox.DataBindings.Add("Text", ANR, nameof(TextBindingModel.Content), true, DataSourceUpdateMode.OnPropertyChanged);
             ANRTextBox.PreviewKeyDown += Scannare_PreviewKey;
 
+            EncoderResolutionTexbBox.TextChanged += FixedIntervalIntegerTextBox_TextChanged;
+            AdvancedOptionsBox.Hide();
         }
 
         private void Scannare_PreviewKey(object? sender, PreviewKeyDownEventArgs e)
@@ -106,7 +112,6 @@ namespace Aerotec.GUI
                     return;
                 }
             }
-
         }
 
         /// <summary>
@@ -170,12 +175,18 @@ namespace Aerotec.GUI
         /// </summary>
         private void StartJet3UpClient(LogInInformation logInInfo)
         {
-            /*
-            jet3UpClientService = IoC.Container
-            _ = jet3UpClientService.Connect(logInInfo.Address.ToString(), 3000);
-            jet3UpClientService.Jet3UpMessageHendler += Jet3UpMessageHandler;
-            jet3UpClientService.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
-        */
+            
+            jet3UpClientService = IoCContainer.Instance.Services.GetRequiredService<IClientService>();
+            if(jet3UpClientService.Connect(logInInfo.Address.ToString(), 3000))
+            {
+                jet3UpClientService.Jet3UpMessageHendler += Jet3UpMessageHandler;
+                jet3UpClientService.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
+            }
+            else
+            {
+                throw new Exception($"Nu s-a putut conecta cu masina pe adresa: {logInInfo.Address}");
+            }
+            
         }
 
         /// <summary>
@@ -199,6 +210,48 @@ namespace Aerotec.GUI
         #endregion
 
         #region Events
+
+        /// <summary>
+        /// Event handler allowing only numbers in a given interval.
+        /// </summary>
+        private void FixedIntervalIntegerTextBox_TextChanged(object? sender, EventArgs e)
+        {
+            int min = 1;
+            int max = 200000;
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(EncoderResolutionTexbBox.Text, "[^0-9]"))
+            {
+                EncoderResolutionTexbBox.Text = EncoderResolutionTexbBox.Text.Remove(EncoderResolutionTexbBox.Text.Length - 1);
+            }
+            else
+            {
+                if((EncoderResolutionTexbBox.Text.Length > 0 && int.Parse(EncoderResolutionTexbBox.Text) > max))
+                {
+                    EncoderResolutionTexbBox.Text = max.ToString();
+                    MessageBox.Show($"Valorea resolutiei nu poate depasii {max}","EROARE",MessageBoxButtons.OK);
+                }
+            }
+            if (string.IsNullOrEmpty(EncoderResolutionTexbBox.Text))
+            {
+                EncoderResolutionTexbBox.Text = min.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Event handler allowing only numbers for delayes.
+        /// </summary>
+        private void DelayTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(DelayTextBox.Text, "[^0-9]"))
+            {
+                DelayTextBox.Text = DelayTextBox.Text.Remove(DelayTextBox.Text.Length - 1);
+            }
+            if (string.IsNullOrEmpty(DelayTextBox.Text))
+            {
+                DelayTextBox.Text = "0";
+            }
+        }
+
         /// <summary>
         /// An event handler that will be called each time the communication to the machine will be interrupted.
         /// </summary>
@@ -215,7 +268,7 @@ namespace Aerotec.GUI
         /// Triggered each time <see cref="MainForm"/> finishes resizing.
         /// </summary>
         /// <param name="e">Contains information about the resize event.</param>
-        private void Form1_Resize(object sender, EventArgs e)
+        private void Form1_Resize(object? sender, EventArgs e)
         {
             ScaleControls();
         }
@@ -257,8 +310,11 @@ namespace Aerotec.GUI
             {
                 if (expected != 0 && !String.IsNullOrEmpty(CurrentQuantityTextBox.Text))
                 {
-                    _ = MessageBox.Show("Caractere gresite in casuta cu numarul de piese din comanda sau cu numarul actual de peise printate", "Caracter Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    _ = MessageBox.Show(
+                        "Caractere gresite in casuta cu numarul de piese din comanda sau cu numarul actual de peise printate",
+                        "Caracter Invalid",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
         }
@@ -281,9 +337,7 @@ namespace Aerotec.GUI
         {
             if (e.Type == Jet3UpStatusMessageType.Error)
             {
-
                 Working = false;
-
                 _ = MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
@@ -401,7 +455,9 @@ namespace Aerotec.GUI
                     var formattedDate = currentDate.ToString("dd/MM/yyyy");
 
                     var anzahl = formattedDate + $" Anzahl Soll:{ExpectedQuantityTxtBox.Text} Ist:{CurrentQuantityTextBox.Text}";
-                    jet3UpClientService.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem, MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, anzahl);
+                    jet3UpClientService.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem,
+                        MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, 
+                        int.Parse(EncoderResolutionTexbBox.Text) * 1000, anzahl);
                     sentFinal = true;
                     _ = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
                     //$"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand"
@@ -610,6 +666,7 @@ namespace Aerotec.GUI
                                                     BTIDTextBox.Text,
                                                     ControllerIdTextBox.Text,
                                                     int.Parse(ExpectedQuantityTxtBox.Text),
+                                                    int.Parse(EncoderResolutionTexbBox.Text) * 1000,
                                                     null);
                 if (!CurrentQuantityTextBox.Text.Equals("0"))
                 {
@@ -631,31 +688,23 @@ namespace Aerotec.GUI
         }
         #endregion
 
-        private void label10_Click(object sender, EventArgs e)
+        private bool isAdvancedOptionsVisible = false;
+
+        private void advancedoptionsButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void ExpectedQuantityTxtBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CurrentQuantityTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DelayTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(DelayTextBox.Text, "[^0-9]"))
+            if(!isAdvancedOptionsVisible)
             {
-                DelayTextBox.Text = DelayTextBox.Text.Remove(DelayTextBox.Text.Length - 1);
+                AdvancedOptionsBox.Show();
+                ComandaDeLucruBox.Hide();
+                advancedoptionsButton.Text = "-";
             }
-            if (string.IsNullOrEmpty(DelayTextBox.Text))
+            else
             {
-                DelayTextBox.Text = "0";
+                AdvancedOptionsBox.Hide();
+                ComandaDeLucruBox.Show();
+                advancedoptionsButton.Text = "+";
             }
+            isAdvancedOptionsVisible = !isAdvancedOptionsVisible;
         }
     }
 }

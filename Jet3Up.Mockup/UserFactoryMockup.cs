@@ -15,7 +15,12 @@ namespace Jet3Up.Services.Mockup
         new User(){ Name = "3", Id = "3" },
         new User(){ Name = "4", Id = "4" }
         };
-        private List<User> users;
+        private List<User> users = new List<User>();
+
+        public UserFactoryMockup()
+        {
+            users.AddRange(DefaultUsers);
+        }
 
         /// <inheritdoc/>
         public User Create()

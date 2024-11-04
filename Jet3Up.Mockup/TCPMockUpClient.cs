@@ -73,17 +73,19 @@ namespace Jet3Up.Services.Mockup
         }
 
         /// <inheritdoc/>
-        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
+        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, 
+            string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity,
+            int encoderResolution, string? anzahl)
         {
             string message;
             Send("^0!RC");
             if (anzahl != null)
             {
-                message = Jet3UpMessageBuilder.Start().Create().SetSize(size, rotation, machine).Write(HTZ, signature, ANR, BTIDX, controllerId, anzahl).End();
+                message = Jet3UpMessageBuilder.Start().Create().SetSize(size, rotation, machine, encoderResolution: encoderResolution).Write(HTZ, signature, ANR, BTIDX, controllerId, anzahl).End();
             }
             else
             {
-                message = Jet3UpMessageBuilder.Start().Create().SetSize(size, rotation, machine).Write(HTZ, signature, ANR, BTIDX, controllerId).End();
+                message = Jet3UpMessageBuilder.Start().Create().SetSize(size, rotation, machine, encoderResolution: encoderResolution).Write(HTZ, signature, ANR, BTIDX, controllerId).End();
             }
 
             Send(message);

@@ -3,7 +3,7 @@
 
 using Aerotec.Data.Model;
 using IoC;
-using Jet3Up.Services;
+using Jet3UpInterfaces.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
@@ -16,6 +16,7 @@ namespace Aerotec.GUI
     {
         private List<string> comboBoxNames;
         private EditUserForm editUserForm;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace Aerotec.GUI
         private void RefreshComboboxInput()
         {
             // Initialize the ComboBox with some initial data (if needed)
-            comboBoxNames = IoCContainer.Instance.Services.GetRequiredService<UserFactory>().GetUserNames();
+            comboBoxNames = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUserNames();
 
             // Assign the DataSource
             LoginUserComboBox.DataSource = comboBoxNames;
@@ -45,6 +46,11 @@ namespace Aerotec.GUI
             LoginUserComboBox.Refresh();
         }
 
+        #region events
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoginButton_Click(object? sender, EventArgs e)
         {
             if (LoginUserComboBox.SelectedItem == null)
@@ -60,7 +66,7 @@ namespace Aerotec.GUI
             try
             {
                 var logInInfo = new LogInInformation(
-                    IoCContainer.Instance.Services.GetRequiredService<UserFactory>().GetUsers().First(x => string.Equals(x.Name, LoginUserComboBox.SelectedItem.ToString())),
+                    IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers().First(x => string.Equals(x.Name, LoginUserComboBox.SelectedItem.ToString())),
                 LogInIPTextBox.Text);
                 var mainForm = new MainForm(logInInfo);
                 mainForm.FormClosed += MainForm_FormClosed;
@@ -71,7 +77,6 @@ namespace Aerotec.GUI
             {
                 _ = MessageBox.Show($"Eroare de conectare la masina \n{ex.Message}", "Eroare conectare", MessageBoxButtons.OK);
             }
-
         }
 
         private void MainForm_FormClosed(object? sender, FormClosedEventArgs e)
@@ -104,10 +109,6 @@ namespace Aerotec.GUI
             RefreshComboboxInput();
             editUserForm = null;
         }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

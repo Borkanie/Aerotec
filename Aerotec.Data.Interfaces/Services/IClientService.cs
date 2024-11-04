@@ -41,7 +41,9 @@ namespace Jet3UpInterfaces.Services
         /// <param name="anzahl">Final message string.
         /// If it's NOT NULL the message will be considered final message and standard size will be written for black machine.
         /// Client specified this configuration.</param>
-        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl);
+        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine,            
+            string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity,
+            int encoderResolution, string? anzahl);
 
         /// <summary>
         /// After each message requesting current counter a go message needs to be sent to the machine.

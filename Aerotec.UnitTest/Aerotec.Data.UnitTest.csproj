@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
@@ -19,7 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aerotec.Data.Interfaces\Jet3UpInterfaces.csproj" />
     <ProjectReference Include="..\Aerotec.Data\Aerotec.Data.csproj" />
+    <ProjectReference Include="..\IoC\IoC.csproj" />
+    <ProjectReference Include="..\Jet3UpHelpers\Jet3UpHelpers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

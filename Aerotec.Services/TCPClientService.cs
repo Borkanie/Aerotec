@@ -69,7 +69,8 @@ namespace Jet3Up.Services
         }
 
         /// <inheritdoc/>
-        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine, string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity, string? anzahl)
+        public void StartWriting(int delay, FontSizeEnum size, int rotation, MachineTypeEnum machine,
+            string HTZ, string signature, string ANR, string BTIDX, string controllerId, int expectedQuantity,int encoderResolution, string? anzahl)
         {
             this.expectedQuantity = expectedQuantity;
             string message;
@@ -80,11 +81,11 @@ namespace Jet3Up.Services
             if (anzahl == null)
             {
 
-                message = jet3upMessageBuilder.SetSize(size, rotation, machine, delay).Write(HTZ, signature, ANR, BTIDX, controllerId).End();
+                message = jet3upMessageBuilder.SetSize(size, rotation, machine, delay, encoderResolution: encoderResolution).Write(HTZ, signature, ANR, BTIDX, controllerId).End();
             }
             else
             {
-                message = jet3upMessageBuilder.SetSize(FontSizeEnum.ISO1_7x5, rotation, MachineTypeEnum.Neagra, delay).Write(HTZ, signature, ANR, BTIDX, controllerId, anzahl).End();
+                message = jet3upMessageBuilder.SetSize(FontSizeEnum.ISO1_7x5, rotation, MachineTypeEnum.Neagra, delay, encoderResolution: encoderResolution).Write(HTZ, signature, ANR, BTIDX, controllerId, anzahl).End();
             }
             Thread.Sleep(500);
             Send(message);
