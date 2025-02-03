@@ -10,7 +10,6 @@ namespace Jet3Up.Services
     /// <inheritdoc/>
     public class UserFactory : IUserFactory
     {
-        private List<User> defaultUsers = new();
         private List<User> users =  new();
         
         public UserFactory()
@@ -40,21 +39,21 @@ namespace Jet3Up.Services
             try
             {
                 users.Remove(user);
-                string jsonFilePath = "users.json";
+                string jsonFilePath = getUserDataFilePath();
                 string json = File.ReadAllText(jsonFilePath);
-                defaultUsers = JsonConvert.DeserializeObject<List<User>>(json);
-
-                if (defaultUsers.Contains(user))
+                var currentUserBase = JsonConvert.DeserializeObject<List<User>>(json);
+                
+                if (currentUserBase != null && currentUserBase.Contains(user))
                 {
-                    defaultUsers.Remove(user);
-                    string serializedJson = JsonConvert.SerializeObject(defaultUsers, Formatting.Indented);
+                    currentUserBase.Remove(user);
+                    string serializedJson = JsonConvert.SerializeObject(currentUserBase, Formatting.Indented);
                     File.WriteAllText(jsonFilePath, serializedJson);
                     users.Remove(user);
                 }
             }
             catch (IOException ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -78,13 +77,12 @@ namespace Jet3Up.Services
         /// <inheritdoc/>
         public void RevertChanges()
         {
-
             try
             {
-                string jsonFilePath = "users.json";
+                string jsonFilePath = getUserDataFilePath();
                 string json = File.ReadAllText(jsonFilePath);
 
-                defaultUsers = JsonConvert.DeserializeObject<List<User>>(json);
+                var defaultUsers = JsonConvert.DeserializeObject<List<User>>(json);
                 foreach (var user in defaultUsers)
                 {
                     var dummy = new User()
@@ -106,30 +104,26 @@ namespace Jet3Up.Services
         {
             try
             {
-                string jsonFilePath = "users.json";
-                
-                if (!File.Exists(jsonFilePath))
-                {
-                   File.Create(jsonFilePath);
-                }
-
-                defaultUsers.Clear();
-                foreach (var user in users)
-                {
-                    var dummy = new User()
-                    {
-                        Name = user.Name,
-                        Id = user.Id,
-                    };
-                    defaultUsers.Add(dummy);
-                }
-                string serializedJson = JsonConvert.SerializeObject(defaultUsers, Formatting.Indented);
+                string jsonFilePath = getUserDataFilePath();
+                string serializedJson = JsonConvert.SerializeObject(users, Formatting.Indented);
                 File.WriteAllText(jsonFilePath, serializedJson);
             }
             catch (IOException ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private static string getUserDataFilePath()
+        {
+            string jsonFilePath = "users.json";
+
+            if (!File.Exists(jsonFilePath))
+            {
+                File.Create(jsonFilePath);
+            }
+
+            return jsonFilePath;
         }
     }
 }
