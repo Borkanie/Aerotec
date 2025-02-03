@@ -10,8 +10,8 @@ namespace Jet3Up.Services
     /// <inheritdoc/>
     public class UserFactory : IUserFactory
     {
-        private List<User> defaultUsers;
-        private List<User> users;
+        private List<User> defaultUsers = new();
+        private List<User> users =  new();
         
         public UserFactory()
         {
