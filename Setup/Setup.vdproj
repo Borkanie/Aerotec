@@ -199,7 +199,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Aerotec"
         "ProductCode" = "8:{219FE9BA-DD13-4E01-A536-5CA96D940BE3}"
-        "PackageCode" = "8:{90D7065B-D607-4B09-A68E-477ED37C62D0}"
+        "PackageCode" = "8:{C55A4EA8-931A-4280-BD89-E299BE84D752}"
         "UpgradeCode" = "8:{AC3B9BE2-43F3-4838-BAC3-B5BDA770C388}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -321,7 +321,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9C1959BF7D664310A3F9E09FACCA87F4"
             {
-            "Name" = "8:Shortcut to aerotec"
+            "Name" = "8:Aerotec"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

@@ -83,6 +83,11 @@ namespace Jet3Up.Services
                 string json = File.ReadAllText(jsonFilePath);
 
                 var defaultUsers = JsonConvert.DeserializeObject<List<User>>(json);
+                if(defaultUsers == null)
+                {
+                    return;
+                }
+                users.Clear();
                 foreach (var user in defaultUsers)
                 {
                     var dummy = new User()
@@ -116,7 +121,7 @@ namespace Jet3Up.Services
 
         private static string getUserDataFilePath()
         {
-            string jsonFilePath = "users.json";
+            string jsonFilePath = AppContext.BaseDirectory + "Resources\\Controllers.json";
 
             if (!File.Exists(jsonFilePath))
             {

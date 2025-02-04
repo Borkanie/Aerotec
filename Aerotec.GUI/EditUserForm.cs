@@ -13,7 +13,7 @@ namespace Aerotec
     /// </summary>
     public partial class EditUserForm : Form
     {
-        private List<User> people;
+        //private List<User> people = new();
         public EditUserForm()
         {
             InitializeComponent();
@@ -24,11 +24,15 @@ namespace Aerotec
             // Load the JSON data from the file
             //string jsonFilePath = "Resources/Controllers.json";
             IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().RevertChanges();
-            dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
+            var users = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = users;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            var people = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
+            
             for (int i = 0; i < people.Count; i++)
             {
                 if (string.IsNullOrEmpty(people[i].Id) || string.IsNullOrEmpty(people[i].Name))
@@ -51,22 +55,36 @@ namespace Aerotec
         private void btnAdd_Click(object sender, EventArgs e)
         {
             // Add a new empty person to the list and refresh the DataGridView
-            people.Add(IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().Create("Utilizator nou"));
+            IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().Create("Utilizator nou");
+            var users = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = people;
+            dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            var people = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
+            try
             {
-                // Remove the selected person(s) from the list and refresh the DataGridView
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    people.RemoveAt(row.Index);
+                    // Remove the selected person(s) from the list and refresh the DataGridView
+                    foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                    {
+                        IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().Destroy(people.First(x => x.Id == row.Cells[0].Value));
+                    }
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = IoCContainer.Instance.Services.GetRequiredService<IUserFactory>().GetUsers();
                 }
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = people;
+                else
+                {
+                    MessageBox.Show("Trebuie sa selectati un rand cu utilizatori, apasand pe coloana libera adiacenta, pentru a sterge!", "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message, "Error when saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

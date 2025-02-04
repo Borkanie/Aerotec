@@ -45,5 +45,11 @@ namespace Jet3UpInterfaces.Factories
         /// <param name="name">The name that will be set to it.</param>
         /// <returns></returns>
         User Create(string name);
+
+        /// <summary>
+        /// Removes a user from the database and from the cache.
+        /// </summary>
+        /// <param name="user"></param>
+        void Destroy(User user);
     }
 }

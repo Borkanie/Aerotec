@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Helper\Users.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="download.ico" />
   </ItemGroup>
 
@@ -31,6 +35,12 @@
     <ProjectReference Include="..\Aerotec.Data\Aerotec.Data.csproj" />
     <ProjectReference Include="..\IoC\IoC.csproj" />
     <ProjectReference Include="..\Jet3UpHelpers\Jet3UpHelpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Helper\Users.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
