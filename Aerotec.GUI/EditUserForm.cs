@@ -84,7 +84,7 @@ namespace Aerotec
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                MessageBox.Show(ex.Message, "Error when saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Eroare la salvarea listei cu controllori!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
