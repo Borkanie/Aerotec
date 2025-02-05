@@ -41,4 +41,4 @@ jobs:
         with:
           name: Installer
           path: Setup/bin/Release/*.msi  # Adjust as needed
-          retention-days: 5  # Keep the artifact for 5 days
+          retention-days: 3  # Keep the artifact for 5 days
