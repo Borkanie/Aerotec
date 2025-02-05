@@ -5,7 +5,7 @@ root = true
 [*.cs]
 
 #### Core EditorConfig Options ####
-file_header_template = Copyrigth (c) S.C. SoftLab S.R.L. \n All Rigths reserved.
+file_header_template = Copyrigth (c) S.C. Blaj.S.A \n All Rigths reserved.
 # Indentation and spacing
 indent_size = 4
 indent_style = space

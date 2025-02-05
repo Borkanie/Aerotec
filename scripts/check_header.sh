@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the expected header
-EXPECTED_HEADER="// Copyrigth (c) S.C.SoftLab S.R.L.\n// All Rigths reserved."
+EXPECTED_HEADER="// Copyrigth (c) S.C.Blaj.SA \n// All Rigths reserved."
 
 # Loop through each .cs file in the current directory
 for file in *.cs; do
