@@ -70,13 +70,14 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore Aerotec.sln
 
-      - name: Build the Installer Project
-        run: msbuild Setup.vdproj /t:Build /p:Configuration=Release # /p:Platform=x86
-        working-directory: Setup
+      - name: Build the Installer Project using Visual Studio
+        run: |
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com" Aerotec.sln /Build "Release"
+        working-directory: ${{ github.workspace }}
 
       - name: Upload Installer Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Installer
-          path: Setup/bin/Release/*.msi  # Adjust as needed
-          retention-days: 3  # Keep the artifact for 5 days
+          path: "**/*.msi"  # Adjust if your MSI file is in a specific location
+          retention-days: 3  # Keep artifact for 5 days
