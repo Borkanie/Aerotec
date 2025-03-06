@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aerotec.Data.Interfaces\Jet3UpInterfaces.csproj" />
-    <ProjectReference Include="..\Aerotec.Data\Aerotec.Data.csproj" />
-    <ProjectReference Include="..\Jet3UpHelpers\Jet3UpHelpers.csproj" />
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Jet3UpHelpers\Helpers.csproj" />
   </ItemGroup>
 
 </Project>

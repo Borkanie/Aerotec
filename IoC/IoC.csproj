@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aerotec.Data.Interfaces\Jet3UpInterfaces.csproj" />
-    <ProjectReference Include="..\Aerotec.Data\Aerotec.Data.csproj" />
-    <ProjectReference Include="..\Aerotec.Services\Jet3Up.Services.csproj" />
-    <ProjectReference Include="..\Jet3Up.Mockup\Jet3Up.Services.Mockup.csproj" />
-    <ProjectReference Include="..\Jet3UpHelpers\Jet3UpHelpers.csproj" />
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\Jet3Up_Mockup\Services.Mockup.csproj" />
+    <ProjectReference Include="..\Jet3UpHelpers\Helpers.csproj" />
   </ItemGroup>
 
 </Project>
