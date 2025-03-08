@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A6EE0DFE9FA94BF7BEB8EAC63A6CA0D3"
+        "MsmKey" = "8:_B55EA0BF62C54FF097A9E4FB71E0934B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -199,7 +199,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Aerotec"
         "ProductCode" = "8:{219FE9BA-DD13-4E01-A536-5CA96D940BE3}"
-        "PackageCode" = "8:{DBD53195-4097-49E4-B7B4-6D28FE59416B}"
+        "PackageCode" = "8:{CB526A1E-7A73-46C9-B3A2-DFD97DF6F7EF}"
         "UpgradeCode" = "8:{AC3B9BE2-43F3-4838-BAC3-B5BDA770C388}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -319,32 +319,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9C1959BF7D664310A3F9E09FACCA87F4"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_75DF35EB9D954B33B223616BABDB8797"
             {
-            "Name" = "8:Aerotec"
+            "Name" = "8:Aerotec.exe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_B55EA0BF62C54FF097A9E4FB71E0934B"
             "Folder" = "8:_D5CC63D0E97A48158DCBD4A39801C250"
             "WorkingFolder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
-            "Icon" = "8:"
+            "Icon" = "8:_7A16920D70F747E4A460886DF2C7181C"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DE52A91795D34C3D9CB4CBEB595607F5"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EC355A790FED4EFF91C14348E3E5EEB7"
             {
-            "Name" = "8:Aerotec"
+            "Name" = "8:Aerotec.exe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:"
+            "Target" = "8:_B55EA0BF62C54FF097A9E4FB71E0934B"
             "Folder" = "8:_48F9D83E8A56485191AD81EAC69C4139"
             "WorkingFolder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
-            "Icon" = "8:"
+            "Icon" = "8:_7A16920D70F747E4A460886DF2C7181C"
             "Feature" = "8:"
             }
         }
@@ -746,9 +746,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A6EE0DFE9FA94BF7BEB8EAC63A6CA0D3"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B55EA0BF62C54FF097A9E4FB71E0934B"
             {
-            "SourcePath" = "8:..\\GUI\\obj\\Debug\\net6.0-windows\\Aerotec.dll"
+            "SourcePath" = "8:..\\FrontEnd\\GUI\\obj\\Release\\net6.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
@@ -767,7 +767,7 @@
             "IsolateTo" = "8:"
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
+            "OutputGroupCanonicalName" = "8:PublishItems"
             "OutputProjectGuid" = "8:{B0A40E90-7B31-4092-AFAB-06160AFDA9FF}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
