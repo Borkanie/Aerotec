@@ -31,10 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Backend\Interfaces\Interfaces.csproj" />
-    <ProjectReference Include="..\..\Backend\Data\Data.csproj" />
-    <ProjectReference Include="..\..\Backend\IoC\IoC.csproj" />
-    <ProjectReference Include="..\..\Backend\Jet3UpHelpers\Helpers.csproj" />
+    <ProjectReference Include="..\..\Jet3Up-communication\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\..\Jet3Up-communication\Data\Data.csproj" />
+    <ProjectReference Include="..\..\Jet3Up-communication\IoC\IoC.csproj" />
+    <ProjectReference Include="..\..\Jet3Up-communication\Jet3UpHelpers\Helpers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

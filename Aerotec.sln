@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Backend\Services\Services.csproj", "{B17FE86C-E55D-42FD-B09E-E40CE97B9102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Jet3Up-communication\Services\Services.csproj", "{B17FE86C-E55D-42FD-B09E-E40CE97B9102}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Backend\Data\Data.csproj", "{10AB7BCD-4585-4225-8B94-5432D6EEADDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Jet3Up-communication\Data\Data.csproj", "{10AB7BCD-4585-4225-8B94-5432D6EEADDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Backend\Interfaces\Interfaces.csproj", "{38D5C509-4DD2-4308-BB11-F8509F3AFDB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Jet3Up-communication\Interfaces\Interfaces.csproj", "{38D5C509-4DD2-4308-BB11-F8509F3AFDB5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoC", "Backend\IoC\IoC.csproj", "{4F7BE8CB-6AB1-466F-AB73-5888BA8A3EE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoC", "Jet3Up-communication\IoC\IoC.csproj", "{4F7BE8CB-6AB1-466F-AB73-5888BA8A3EE6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Backend\Jet3UpHelpers\Helpers.csproj", "{CE9B2B17-D900-46DB-8D70-9711BB839674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Jet3Up-communication\Jet3UpHelpers\Helpers.csproj", "{CE9B2B17-D900-46DB-8D70-9711BB839674}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aerotec", "FrontEnd\GUI\Aerotec.csproj", "{B0A40E90-7B31-4092-AFAB-06160AFDA9FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Mockup", "Backend\Jet3Up_Mockup\Services.Mockup.csproj", "{31319E9F-FBA2-43AC-A788-E0513C6F8DB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Mockup", "Jet3Up-communication\Jet3Up_Mockup\Services.Mockup.csproj", "{31319E9F-FBA2-43AC-A788-E0513C6F8DB6}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{124A4B0D-6A86-48D4-8C37-BB9066721339}"
 EndProject

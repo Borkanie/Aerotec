@@ -1,0 +1,3 @@
+[submodule "Jet3Up-communication"]
+	path = Jet3Up-communication
+	url = https://github.com/Borkanie/Jet3Up-communication.git
