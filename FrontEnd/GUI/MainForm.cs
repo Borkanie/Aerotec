@@ -3,10 +3,11 @@
 using Aerotec.Data.Model;
 using Aerotec.Resources.Helper;
 using Aerotec.ViewModel;
+using Interfaces.Factories;
 using IoC;
 using Jet3UpHelpers;
 using Jet3UpHelpers.Resources;
-using Jet3UpInterfaces.Services;
+using Jet3UpInterfaces.Client;
 using Microsoft.Extensions.DependencyInjection;
 using OfficeOpenXml;
 
@@ -18,7 +19,7 @@ namespace Aerotec.GUI
     public partial class MainForm : Form
     {
         #region fields
-        private IClientService jet3UpClientService;
+        private IClient jet3UpClient;
         private bool working = false;
         private ContactForm contactForm;
         private TextBindingModel ControllerId = new();
@@ -176,11 +177,11 @@ namespace Aerotec.GUI
         private void StartJet3UpClient(LogInInformation logInInfo)
         {
             
-            jet3UpClientService = IoCContainer.Instance.Services.GetRequiredService<IClientService>();
-            if(jet3UpClientService.Connect(logInInfo.Address.ToString(), 3000))
+            jet3UpClient = IoCContainer.Instance.Services.GetRequiredService<IClientFactory>().createClient(logInInfo.Address.ToString(), 3000,"MainClient");
+            if(jet3UpClient.Connect())
             {
-                jet3UpClientService.Jet3UpMessageHendler += Jet3UpMessageHandler;
-                jet3UpClientService.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
+                jet3UpClient.Jet3UpMessageHendler += Jet3UpMessageHandler;
+                jet3UpClient.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
             }
             else
             {
@@ -257,9 +258,9 @@ namespace Aerotec.GUI
         /// </summary>
         private void Jet3UpClientService_Jet3UpCommunicationInterrupted(object? sender, Jet3UpCommunicationInterruptedErrorEventArgs e)
         {
-            if (jet3UpClientService is IClientService && e.ErrorWhenReading == false)
+            if (jet3UpClient is IClient && e.ErrorWhenReading == false)
             {
-                jet3UpClientService.StopListening();
+                jet3UpClient.StopListening();
             }
             _ = MessageBox.Show(this, $"Eroare de comunicare cu aparatul procesul a fost intrerupt cu eroare \n{e.Exception.Message}", "Eroare de comunicare", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -389,7 +390,7 @@ namespace Aerotec.GUI
                 contactForm.Close();
             }
             contactForm = null;
-            jet3UpClientService.StopCommand();
+            jet3UpClient.StopCommand();
         }
 
         /// <summary>
@@ -409,7 +410,7 @@ namespace Aerotec.GUI
         private void IncreaseCurrentCount_Click(object sender, EventArgs e)
         {
             if (CurrentQuantityTextBox.Text != ExpectedQuantityTxtBox.Text)
-                jet3UpClientService.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text) + 1);
+                jet3UpClient.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text) + 1);
         }
 
         /// <summary>
@@ -420,7 +421,7 @@ namespace Aerotec.GUI
         private void DecreaseCurrentCount_Click(object sender, EventArgs e)
         {
             if (CurrentQuantityTextBox.Text != "0")
-                jet3UpClientService.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text) - 1);
+                jet3UpClient.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text) - 1);
 
         }
         #endregion
@@ -432,7 +433,7 @@ namespace Aerotec.GUI
         /// </summary>
         private void ComandIsComplete()
         {
-            jet3UpClientService.StopCommand();
+            jet3UpClient.StopCommand();
             Working = false;
             StartStopButton.BackColor = Color.Green;
             StartStopButton.Text = "START PRODUCTIE";
@@ -446,7 +447,7 @@ namespace Aerotec.GUI
         /// </summary>
         private void FinalComand()
         {
-            jet3UpClientService.StopCommand();
+            jet3UpClient.StopCommand();
             var dialog = MessageBox.Show("Doriti sa marcati finalul de comanda?", "Ultima piesa", MessageBoxButtons.YesNo);
             switch (dialog)
             {
@@ -455,7 +456,7 @@ namespace Aerotec.GUI
                     var formattedDate = currentDate.ToString("dd/MM/yyyy");
 
                     var anzahl = formattedDate + $" Anzahl Soll:{ExpectedQuantityTxtBox.Text} Ist:{CurrentQuantityTextBox.Text}";
-                    jet3UpClientService.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem,
+                    jet3UpClient.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem,
                         MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, 
                         int.Parse(EncoderResolutionTexbBox.Text) * 1000, anzahl);
                     sentFinal = true;
@@ -656,7 +657,7 @@ namespace Aerotec.GUI
                         return;
                     }
                 }
-                jet3UpClientService.StartWriting(int.Parse(DelayTextBox.Text),
+                jet3UpClient.StartWriting(int.Parse(DelayTextBox.Text),
                                                     (FontSizeEnum)SizeComboBox.SelectedItem,
                                                     (int)ComboBoxRotation.SelectedItem,
                                                     (MachineTypeEnum)ComboBoxMachine.SelectedItem,
@@ -670,7 +671,7 @@ namespace Aerotec.GUI
                                                     null);
                 if (!CurrentQuantityTextBox.Text.Equals("0"))
                 {
-                    jet3UpClientService.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text));
+                    jet3UpClient.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text));
                 }
                 StartStopButton.BackColor = Color.Red;
                 StartStopButton.Text = "STOP";
@@ -680,7 +681,7 @@ namespace Aerotec.GUI
                 HTZTextBox.Text = "";
                 BTIDTextBox.Text = "";
                 ANRTextBox.Text = "";
-                jet3UpClientService.StopCommand();
+                jet3UpClient.StopCommand();
                 StartStopButton.BackColor = Color.Green;
                 StartStopButton.Text = "START PRODUCTIE";
                 CurrentQuantityTextBox.Text = "0";
