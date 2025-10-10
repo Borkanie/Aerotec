@@ -176,16 +176,23 @@ namespace Aerotec.GUI
         /// </summary>
         private void StartJet3UpClient(LogInInformation logInInfo)
         {
-            
             jet3UpClient = IoCContainer.Instance.Services.GetRequiredService<IClientFactory>().createClient(logInInfo.Address.ToString(), 3000,"MainClient");
-            if(jet3UpClient.Connect())
+            if(jet3UpClient is not null)
             {
-                jet3UpClient.Jet3UpMessageHendler += Jet3UpMessageHandler;
-                jet3UpClient.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
+                if (jet3UpClient.Connect())
+                {
+                    jet3UpClient.Jet3UpMessageHendler += Jet3UpMessageHandler;
+                    jet3UpClient.Jet3UpCommunicationInterrupted += Jet3UpClientService_Jet3UpCommunicationInterrupted;
+                }
+                else
+                {
+                    IoCContainer.Instance.Services.GetRequiredService<IClientFactory>().RemoveClient(jet3UpClient);
+                    throw new Exception($"Clientul nu s-a putut conecta cu masina pe adresa: {logInInfo.Address}");
+                }
             }
             else
             {
-                throw new Exception($"Nu s-a putut conecta cu masina pe adresa: {logInInfo.Address}");
+                throw new Exception($"Nu s-a putut genera clientul pentru: {logInInfo.Address}");
             }
             
         }

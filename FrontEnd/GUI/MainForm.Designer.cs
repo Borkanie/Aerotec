@@ -132,7 +132,7 @@ namespace Aerotec.GUI
             SignatureTextBox.ReadOnly = true;
             SignatureTextBox.Size = new Size(112, 27);
             SignatureTextBox.TabIndex = 2;
-            SignatureTextBox.Text = "AD";
+            SignatureTextBox.Text = "A-D";
             SignatureTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // DataHTZTextBox
