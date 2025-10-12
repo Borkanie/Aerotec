@@ -456,27 +456,35 @@ namespace Aerotec.GUI
         {
             jet3UpClient.StopCommand();
             var dialog = MessageBox.Show("Doriti sa marcati finalul de comanda?", "Ultima piesa", MessageBoxButtons.YesNo);
-            switch (dialog)
+            if(dialog == DialogResult.Yes)
             {
-                case DialogResult.Yes:
-                    DateTime currentDate = DateTime.Now;
-                    var formattedDate = currentDate.ToString("dd/MM/yyyy");
+                DateTime currentDate = DateTime.Now;
+                var formattedDate = currentDate.ToString("dd/MM/yyyy");
 
-                    var anzahl = formattedDate + $" Anzahl Soll:{ExpectedQuantityTxtBox.Text} Ist:{CurrentQuantityTextBox.Text}";
-                    jet3UpClient.StartWriting(Convert.ToInt32(DelayTextBox.Text), (FontSizeEnum)SizeComboBox.SelectedItem, (int)ComboBoxRotation.SelectedItem,
-                        MachineTypeEnum.Neagra, HTZTextBox.Text, SignatureTextBox.Text, ANRTextBox.Text, BTIDTextBox.Text, ControllerIdTextBox.Text, 1, 
-                        int.Parse(EncoderResolutionTexbBox.Text) * 1000, anzahl);
-                    sentFinal = true;
-                    _ = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
-                    //$"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand"
+                var anzahl = formattedDate + $" Anzahl Soll:{ExpectedQuantityTxtBox.Text} Ist:{CurrentQuantityTextBox.Text}";
+                jet3UpClient.StartWriting(Convert.ToInt32(DelayTextBox.Text),
+                    (FontSizeEnum)SizeComboBox.SelectedItem,
+                    (int)ComboBoxRotation.SelectedItem,
+                    MachineTypeEnum.Neagra,
+                    HTZTextBox.Text,
+                    SignatureTextBox.Text,
+                    ANRTextBox.Text,
+                    BTIDTextBox.Text,
+                    ControllerIdTextBox.Text,
+                    1,
+                    0,
+                    int.Parse(EncoderResolutionTexbBox.Text) * 1000, anzahl);
+                sentFinal = true;
+                _ = int.Parse(CurrentQuantityTextBox.Text) == int.Parse(ExpectedQuantityTxtBox.Text) ? "Fertig" : "Fahlend";
+                //$"Auftrag                                  HTZ-Nr.                 Index           PKZ         Soll        Ist     Stand"
 
-                    var fertig = (ExpectedQuantityTxtBox.Text == CurrentQuantityTextBox.Text) ? "fertig" : "Nicht fertig";
-                    WriteOnTxtFile($"{ANRTextBox.Text}                                  {HTZTextBox.Text}                 {BTIDTextBox.Text}           {ControllerTextBox.Text}         {ExpectedQuantityTxtBox.Text}        {CurrentQuantityTextBox.Text}     {fertig}");
-                    WriteOnExcelFile();
-                    return;
-                default:
-                    StartStopWorking(false);
-                    return;
+                var fertig = (ExpectedQuantityTxtBox.Text == CurrentQuantityTextBox.Text) ? "fertig" : "Nicht fertig";
+                WriteOnTxtFile($"{ANRTextBox.Text}                                  {HTZTextBox.Text}                 {BTIDTextBox.Text}           {ControllerTextBox.Text}         {ExpectedQuantityTxtBox.Text}        {CurrentQuantityTextBox.Text}     {fertig}");
+                WriteOnExcelFile();
+            }
+            else
+            {
+                StartStopWorking(false);
             }
         }
 
@@ -660,7 +668,6 @@ namespace Aerotec.GUI
                     var result = MessageBox.Show("Sunteti pe cale sa suprascrieti numarul de piese actuale continuati?", "ATENTIE", MessageBoxButtons.YesNo);
                     if (result == DialogResult.No)
                     {
-                        StartStopWorking(false);
                         return;
                     }
                 }
@@ -674,12 +681,9 @@ namespace Aerotec.GUI
                                                     BTIDTextBox.Text,
                                                     ControllerIdTextBox.Text,
                                                     int.Parse(ExpectedQuantityTxtBox.Text),
+                                                    int.Parse(CurrentQuantityTextBox.Text),
                                                     int.Parse(EncoderResolutionTexbBox.Text) * 1000,
                                                     null);
-                if (!CurrentQuantityTextBox.Text.Equals("0"))
-                {
-                    jet3UpClient.SetCount(int.Parse(ExpectedQuantityTxtBox.Text), int.Parse(CurrentQuantityTextBox.Text));
-                }
                 StartStopButton.BackColor = Color.Red;
                 StartStopButton.Text = "STOP";
             }

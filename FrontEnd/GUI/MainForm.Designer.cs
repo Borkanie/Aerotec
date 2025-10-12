@@ -91,56 +91,63 @@ namespace Aerotec.GUI
             INFORMATI.Controls.Add(DataControllerIdTextBox);
             INFORMATI.Controls.Add(SignatureTextBox);
             INFORMATI.Controls.Add(DataHTZTextBox);
-            INFORMATI.Location = new Point(27, 13);
+            INFORMATI.Location = new Point(24, 10);
+            INFORMATI.Margin = new Padding(3, 2, 3, 2);
             INFORMATI.Name = "INFORMATI";
-            INFORMATI.Size = new Size(332, 105);
+            INFORMATI.Padding = new Padding(3, 2, 3, 2);
+            INFORMATI.Size = new Size(290, 79);
             INFORMATI.TabIndex = 0;
             INFORMATI.TabStop = false;
             INFORMATI.Text = "PREVIZUALIZARE:";
             // 
             // DataANRTextBox
             // 
-            DataANRTextBox.Location = new Point(14, 63);
+            DataANRTextBox.Location = new Point(12, 47);
+            DataANRTextBox.Margin = new Padding(3, 2, 3, 2);
             DataANRTextBox.Name = "DataANRTextBox";
             DataANRTextBox.ReadOnly = true;
-            DataANRTextBox.Size = new Size(115, 27);
+            DataANRTextBox.Size = new Size(101, 23);
             DataANRTextBox.TabIndex = 5;
             DataANRTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // DataBTIDTextBox
             // 
-            DataBTIDTextBox.Location = new Point(135, 63);
+            DataBTIDTextBox.Location = new Point(118, 47);
+            DataBTIDTextBox.Margin = new Padding(3, 2, 3, 2);
             DataBTIDTextBox.Name = "DataBTIDTextBox";
             DataBTIDTextBox.ReadOnly = true;
-            DataBTIDTextBox.Size = new Size(73, 27);
+            DataBTIDTextBox.Size = new Size(64, 23);
             DataBTIDTextBox.TabIndex = 4;
             DataBTIDTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // DataControllerIdTextBox
             // 
-            DataControllerIdTextBox.Location = new Point(214, 63);
+            DataControllerIdTextBox.Location = new Point(187, 47);
+            DataControllerIdTextBox.Margin = new Padding(3, 2, 3, 2);
             DataControllerIdTextBox.Name = "DataControllerIdTextBox";
             DataControllerIdTextBox.ReadOnly = true;
-            DataControllerIdTextBox.Size = new Size(112, 27);
+            DataControllerIdTextBox.Size = new Size(98, 23);
             DataControllerIdTextBox.TabIndex = 3;
             DataControllerIdTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // SignatureTextBox
             // 
-            SignatureTextBox.Location = new Point(214, 23);
+            SignatureTextBox.Location = new Point(187, 17);
+            SignatureTextBox.Margin = new Padding(3, 2, 3, 2);
             SignatureTextBox.Name = "SignatureTextBox";
             SignatureTextBox.ReadOnly = true;
-            SignatureTextBox.Size = new Size(112, 27);
+            SignatureTextBox.Size = new Size(98, 23);
             SignatureTextBox.TabIndex = 2;
             SignatureTextBox.Text = "A-D";
             SignatureTextBox.TextAlign = HorizontalAlignment.Center;
             // 
             // DataHTZTextBox
             // 
-            DataHTZTextBox.Location = new Point(14, 23);
+            DataHTZTextBox.Location = new Point(12, 17);
+            DataHTZTextBox.Margin = new Padding(3, 2, 3, 2);
             DataHTZTextBox.Name = "DataHTZTextBox";
             DataHTZTextBox.ReadOnly = true;
-            DataHTZTextBox.Size = new Size(194, 27);
+            DataHTZTextBox.Size = new Size(170, 23);
             DataHTZTextBox.TabIndex = 0;
             DataHTZTextBox.TextAlign = HorizontalAlignment.Center;
             // 
@@ -156,9 +163,11 @@ namespace Aerotec.GUI
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(ControllerIdTextBox);
             groupBox2.Controls.Add(ControllerTextBox);
-            groupBox2.Location = new Point(27, 124);
+            groupBox2.Location = new Point(24, 93);
+            groupBox2.Margin = new Padding(3, 2, 3, 2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(332, 168);
+            groupBox2.Padding = new Padding(3, 2, 3, 2);
+            groupBox2.Size = new Size(290, 126);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "UTILIZATOR";
@@ -167,9 +176,9 @@ namespace Aerotec.GUI
             // 
             LabelRotatie.Anchor = AnchorStyles.Left;
             LabelRotatie.AutoSize = true;
-            LabelRotatie.Location = new Point(62, 34);
+            LabelRotatie.Location = new Point(54, 26);
             LabelRotatie.Name = "LabelRotatie";
-            LabelRotatie.Size = new Size(67, 20);
+            LabelRotatie.Size = new Size(52, 15);
             LabelRotatie.TabIndex = 12;
             LabelRotatie.Text = "ROTATIE:";
             // 
@@ -177,18 +186,19 @@ namespace Aerotec.GUI
             // 
             ComboBoxRotation.Anchor = AnchorStyles.Right;
             ComboBoxRotation.FormattingEnabled = true;
-            ComboBoxRotation.Location = new Point(168, 26);
+            ComboBoxRotation.Location = new Point(147, 20);
+            ComboBoxRotation.Margin = new Padding(3, 2, 3, 2);
             ComboBoxRotation.Name = "ComboBoxRotation";
-            ComboBoxRotation.Size = new Size(158, 28);
+            ComboBoxRotation.Size = new Size(139, 23);
             ComboBoxRotation.TabIndex = 11;
             // 
             // label9
             // 
             label9.Anchor = AnchorStyles.Left;
             label9.AutoSize = true;
-            label9.Location = new Point(61, 72);
+            label9.Location = new Point(53, 54);
             label9.Name = "label9";
-            label9.Size = new Size(84, 20);
+            label9.Size = new Size(68, 15);
             label9.TabIndex = 10;
             label9.Text = "CERNEALA:";
             // 
@@ -196,18 +206,19 @@ namespace Aerotec.GUI
             // 
             ComboBoxMachine.Anchor = AnchorStyles.Right;
             ComboBoxMachine.FormattingEnabled = true;
-            ComboBoxMachine.Location = new Point(168, 64);
+            ComboBoxMachine.Location = new Point(147, 48);
+            ComboBoxMachine.Margin = new Padding(3, 2, 3, 2);
             ComboBoxMachine.Name = "ComboBoxMachine";
-            ComboBoxMachine.Size = new Size(158, 28);
+            ComboBoxMachine.Size = new Size(139, 23);
             ComboBoxMachine.TabIndex = 9;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(102, 140);
+            label2.Location = new Point(89, 105);
             label2.Name = "label2";
-            label2.Size = new Size(27, 20);
+            label2.Size = new Size(21, 15);
             label2.TabIndex = 6;
             label2.Text = "ID:";
             // 
@@ -215,28 +226,30 @@ namespace Aerotec.GUI
             // 
             label1.Anchor = AnchorStyles.Left;
             label1.AutoSize = true;
-            label1.Location = new Point(32, 105);
+            label1.Location = new Point(28, 79);
             label1.Name = "label1";
-            label1.Size = new Size(97, 20);
+            label1.Size = new Size(80, 15);
             label1.TabIndex = 5;
             label1.Text = "CONTROLOR:";
             // 
             // ControllerIdTextBox
             // 
             ControllerIdTextBox.Anchor = AnchorStyles.Left;
-            ControllerIdTextBox.Location = new Point(168, 133);
+            ControllerIdTextBox.Location = new Point(147, 100);
+            ControllerIdTextBox.Margin = new Padding(3, 2, 3, 2);
             ControllerIdTextBox.Name = "ControllerIdTextBox";
             ControllerIdTextBox.ReadOnly = true;
-            ControllerIdTextBox.Size = new Size(158, 27);
+            ControllerIdTextBox.Size = new Size(139, 23);
             ControllerIdTextBox.TabIndex = 4;
             // 
             // ControllerTextBox
             // 
             ControllerTextBox.Anchor = AnchorStyles.Left;
-            ControllerTextBox.Location = new Point(168, 98);
+            ControllerTextBox.Location = new Point(147, 74);
+            ControllerTextBox.Margin = new Padding(3, 2, 3, 2);
             ControllerTextBox.Name = "ControllerTextBox";
             ControllerTextBox.ReadOnly = true;
-            ControllerTextBox.Size = new Size(158, 27);
+            ControllerTextBox.Size = new Size(139, 23);
             ControllerTextBox.TabIndex = 3;
             // 
             // ComandaDeLucruBox
@@ -249,9 +262,11 @@ namespace Aerotec.GUI
             ComandaDeLucruBox.Controls.Add(BTIDTextBox);
             ComandaDeLucruBox.Controls.Add(HTZTextBox);
             ComandaDeLucruBox.Controls.Add(ANRTextBox);
-            ComandaDeLucruBox.Location = new Point(27, 299);
+            ComandaDeLucruBox.Location = new Point(24, 224);
+            ComandaDeLucruBox.Margin = new Padding(3, 2, 3, 2);
             ComandaDeLucruBox.Name = "ComandaDeLucruBox";
-            ComandaDeLucruBox.Size = new Size(332, 139);
+            ComandaDeLucruBox.Padding = new Padding(3, 2, 3, 2);
+            ComandaDeLucruBox.Size = new Size(290, 104);
             ComandaDeLucruBox.TabIndex = 2;
             ComandaDeLucruBox.TabStop = false;
             ComandaDeLucruBox.Text = "COMANDA DE LUCRU";
@@ -260,10 +275,10 @@ namespace Aerotec.GUI
             // 
             label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(26, 105);
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label5.Location = new Point(23, 79);
             label5.Name = "label5";
-            label5.Size = new Size(142, 20);
+            label5.Size = new Size(110, 15);
             label5.TabIndex = 9;
             label5.Text = "INDEX COMANDA:";
             // 
@@ -271,10 +286,10 @@ namespace Aerotec.GUI
             // 
             label4.Anchor = AnchorStyles.Left;
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(126, 72);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label4.Location = new Point(110, 54);
             label4.Name = "label4";
-            label4.Size = new Size(42, 20);
+            label4.Size = new Size(33, 15);
             label4.TabIndex = 8;
             label4.Text = "HTZ:";
             // 
@@ -282,45 +297,48 @@ namespace Aerotec.GUI
             // 
             label3.Anchor = AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(26, 40);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label3.Location = new Point(23, 30);
             label3.Name = "label3";
-            label3.Size = new Size(142, 20);
+            label3.Size = new Size(110, 15);
             label3.TabIndex = 7;
             label3.Text = "NUMAR COMADA:";
             // 
             // BTIDTextBox
             // 
             BTIDTextBox.Anchor = AnchorStyles.Bottom;
-            BTIDTextBox.Location = new Point(168, 102);
+            BTIDTextBox.Location = new Point(147, 76);
+            BTIDTextBox.Margin = new Padding(3, 2, 3, 2);
             BTIDTextBox.Name = "BTIDTextBox";
-            BTIDTextBox.Size = new Size(158, 27);
+            BTIDTextBox.Size = new Size(139, 23);
             BTIDTextBox.TabIndex = 6;
             // 
             // HTZTextBox
             // 
             HTZTextBox.Anchor = AnchorStyles.Bottom;
-            HTZTextBox.Location = new Point(168, 69);
+            HTZTextBox.Location = new Point(147, 52);
+            HTZTextBox.Margin = new Padding(3, 2, 3, 2);
             HTZTextBox.Name = "HTZTextBox";
-            HTZTextBox.Size = new Size(158, 27);
+            HTZTextBox.Size = new Size(139, 23);
             HTZTextBox.TabIndex = 5;
             // 
             // ANRTextBox
             // 
             ANRTextBox.Anchor = AnchorStyles.Right;
-            ANRTextBox.Location = new Point(168, 36);
+            ANRTextBox.Location = new Point(147, 27);
+            ANRTextBox.Margin = new Padding(3, 2, 3, 2);
             ANRTextBox.Name = "ANRTextBox";
-            ANRTextBox.Size = new Size(158, 27);
+            ANRTextBox.Size = new Size(139, 23);
             ANRTextBox.TabIndex = 4;
             // 
             // label6
             // 
             label6.Anchor = AnchorStyles.Right;
             label6.AutoSize = true;
-            label6.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(9, 67);
+            label6.Font = new Font("Arial", 9F);
+            label6.Location = new Point(8, 50);
             label6.Name = "label6";
-            label6.Size = new Size(214, 17);
+            label6.Size = new Size(172, 15);
             label6.TabIndex = 3;
             label6.Text = "SELECTATI MARIMEA DORITA:";
             // 
@@ -337,9 +355,11 @@ namespace Aerotec.GUI
             groupBox4.Controls.Add(ExpectedQuantityTxtBox);
             groupBox4.Controls.Add(label7);
             groupBox4.Controls.Add(label6);
-            groupBox4.Location = new Point(393, 142);
+            groupBox4.Location = new Point(344, 106);
+            groupBox4.Margin = new Padding(3, 2, 3, 2);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(395, 209);
+            groupBox4.Padding = new Padding(3, 2, 3, 2);
+            groupBox4.Size = new Size(346, 157);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             groupBox4.Text = "MARIMEA SI CANTITATE";
@@ -348,19 +368,20 @@ namespace Aerotec.GUI
             // 
             label10.Anchor = AnchorStyles.Right;
             label10.AutoSize = true;
-            label10.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label10.Location = new Point(85, 31);
+            label10.Font = new Font("Arial", 9F);
+            label10.Location = new Point(74, 23);
             label10.Name = "label10";
-            label10.Size = new Size(138, 17);
+            label10.Size = new Size(114, 15);
             label10.TabIndex = 14;
             label10.Text = "DELAY(micrometri):";
             // 
             // DelayTextBox
             // 
             DelayTextBox.Anchor = AnchorStyles.Right;
-            DelayTextBox.Location = new Point(238, 26);
+            DelayTextBox.Location = new Point(208, 20);
+            DelayTextBox.Margin = new Padding(3, 2, 3, 2);
             DelayTextBox.Name = "DelayTextBox";
-            DelayTextBox.Size = new Size(151, 27);
+            DelayTextBox.Size = new Size(133, 23);
             DelayTextBox.TabIndex = 13;
             DelayTextBox.Text = "2000";
             DelayTextBox.TextChanged += DelayTextBox_TextChanged;
@@ -368,9 +389,10 @@ namespace Aerotec.GUI
             // ButtonDecreaseCurrentCount
             // 
             ButtonDecreaseCurrentCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ButtonDecreaseCurrentCount.Location = new Point(344, 166);
+            ButtonDecreaseCurrentCount.Location = new Point(301, 124);
+            ButtonDecreaseCurrentCount.Margin = new Padding(3, 2, 3, 2);
             ButtonDecreaseCurrentCount.Name = "ButtonDecreaseCurrentCount";
-            ButtonDecreaseCurrentCount.Size = new Size(26, 25);
+            ButtonDecreaseCurrentCount.Size = new Size(23, 19);
             ButtonDecreaseCurrentCount.TabIndex = 12;
             ButtonDecreaseCurrentCount.Text = "-";
             ButtonDecreaseCurrentCount.UseVisualStyleBackColor = true;
@@ -379,9 +401,10 @@ namespace Aerotec.GUI
             // ButtonIncreaseCurrentCount
             // 
             ButtonIncreaseCurrentCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ButtonIncreaseCurrentCount.Location = new Point(270, 166);
+            ButtonIncreaseCurrentCount.Location = new Point(236, 124);
+            ButtonIncreaseCurrentCount.Margin = new Padding(3, 2, 3, 2);
             ButtonIncreaseCurrentCount.Name = "ButtonIncreaseCurrentCount";
-            ButtonIncreaseCurrentCount.Size = new Size(26, 25);
+            ButtonIncreaseCurrentCount.Size = new Size(23, 19);
             ButtonIncreaseCurrentCount.TabIndex = 11;
             ButtonIncreaseCurrentCount.Text = "+";
             ButtonIncreaseCurrentCount.UseVisualStyleBackColor = true;
@@ -391,19 +414,20 @@ namespace Aerotec.GUI
             // 
             label8.Anchor = AnchorStyles.Right;
             label8.AutoSize = true;
-            label8.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(42, 101);
+            label8.Font = new Font("Arial", 9F);
+            label8.Location = new Point(37, 76);
             label8.Name = "label8";
-            label8.Size = new Size(181, 17);
+            label8.Size = new Size(146, 15);
             label8.TabIndex = 10;
             label8.Text = "TOTAL PIESE COMANDA:";
             // 
             // CurrentQuantityTextBox
             // 
             CurrentQuantityTextBox.Anchor = AnchorStyles.Right;
-            CurrentQuantityTextBox.Location = new Point(238, 133);
+            CurrentQuantityTextBox.Location = new Point(208, 100);
+            CurrentQuantityTextBox.Margin = new Padding(3, 2, 3, 2);
             CurrentQuantityTextBox.Name = "CurrentQuantityTextBox";
-            CurrentQuantityTextBox.Size = new Size(151, 27);
+            CurrentQuantityTextBox.Size = new Size(133, 23);
             CurrentQuantityTextBox.TabIndex = 9;
             CurrentQuantityTextBox.Text = "0";
             // 
@@ -411,17 +435,19 @@ namespace Aerotec.GUI
             // 
             SizeComboBox.Anchor = AnchorStyles.Right;
             SizeComboBox.FormattingEnabled = true;
-            SizeComboBox.Location = new Point(238, 62);
+            SizeComboBox.Location = new Point(208, 46);
+            SizeComboBox.Margin = new Padding(3, 2, 3, 2);
             SizeComboBox.Name = "SizeComboBox";
-            SizeComboBox.Size = new Size(151, 28);
+            SizeComboBox.Size = new Size(133, 23);
             SizeComboBox.TabIndex = 8;
             // 
             // ExpectedQuantityTxtBox
             // 
             ExpectedQuantityTxtBox.Anchor = AnchorStyles.Right;
-            ExpectedQuantityTxtBox.Location = new Point(238, 96);
+            ExpectedQuantityTxtBox.Location = new Point(208, 72);
+            ExpectedQuantityTxtBox.Margin = new Padding(3, 2, 3, 2);
             ExpectedQuantityTxtBox.Name = "ExpectedQuantityTxtBox";
-            ExpectedQuantityTxtBox.Size = new Size(151, 27);
+            ExpectedQuantityTxtBox.Size = new Size(133, 23);
             ExpectedQuantityTxtBox.TabIndex = 7;
             ExpectedQuantityTxtBox.Text = "0";
             ExpectedQuantityTxtBox.KeyPress += ExpectedQuantityTxtBox_KeyPress;
@@ -430,10 +456,10 @@ namespace Aerotec.GUI
             // 
             label7.Anchor = AnchorStyles.Right;
             label7.AutoSize = true;
-            label7.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(95, 143);
+            label7.Font = new Font("Arial", 9F);
+            label7.Location = new Point(83, 107);
             label7.Name = "label7";
-            label7.Size = new Size(128, 17);
+            label7.Size = new Size(103, 15);
             label7.TabIndex = 6;
             label7.Text = "PIESE MARCATE:";
             // 
@@ -441,9 +467,11 @@ namespace Aerotec.GUI
             // 
             pictureBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(686, 357);
+            pictureBox1.Location = new Point(600, 268);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(102, 97);
+            pictureBox1.Size = new Size(89, 73);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
@@ -451,18 +479,21 @@ namespace Aerotec.GUI
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(393, 24);
+            pictureBox2.Location = new Point(344, 18);
+            pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(395, 112);
+            pictureBox2.Size = new Size(346, 84);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 6;
             pictureBox2.TabStop = false;
             // 
             // StartStopButton
             // 
             StartStopButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            StartStopButton.Location = new Point(393, 375);
+            StartStopButton.Location = new Point(344, 281);
+            StartStopButton.Margin = new Padding(3, 2, 3, 2);
             StartStopButton.Name = "StartStopButton";
-            StartStopButton.Size = new Size(157, 63);
+            StartStopButton.Size = new Size(137, 47);
             StartStopButton.TabIndex = 7;
             StartStopButton.Text = "START";
             StartStopButton.UseVisualStyleBackColor = true;
@@ -471,9 +502,10 @@ namespace Aerotec.GUI
             // ContactButton
             // 
             ContactButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            ContactButton.Location = new Point(580, 371);
+            ContactButton.Location = new Point(508, 278);
+            ContactButton.Margin = new Padding(3, 2, 3, 2);
             ContactButton.Name = "ContactButton";
-            ContactButton.Size = new Size(86, 63);
+            ContactButton.Size = new Size(75, 47);
             ContactButton.TabIndex = 8;
             ContactButton.Text = "CONTACT";
             ContactButton.UseVisualStyleBackColor = true;
@@ -485,9 +517,11 @@ namespace Aerotec.GUI
             AdvancedOptionsBox.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AdvancedOptionsBox.Controls.Add(label16);
             AdvancedOptionsBox.Controls.Add(EncoderResolutionTexbBox);
-            AdvancedOptionsBox.Location = new Point(27, 299);
+            AdvancedOptionsBox.Location = new Point(24, 224);
+            AdvancedOptionsBox.Margin = new Padding(3, 2, 3, 2);
             AdvancedOptionsBox.Name = "AdvancedOptionsBox";
-            AdvancedOptionsBox.Size = new Size(351, 155);
+            AdvancedOptionsBox.Padding = new Padding(3, 2, 3, 2);
+            AdvancedOptionsBox.Size = new Size(307, 116);
             AdvancedOptionsBox.TabIndex = 10;
             AdvancedOptionsBox.TabStop = false;
             AdvancedOptionsBox.Text = "Optiuni Avansate";
@@ -496,28 +530,30 @@ namespace Aerotec.GUI
             // 
             label16.Anchor = AnchorStyles.Left;
             label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.Location = new Point(14, 61);
+            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label16.Location = new Point(12, 46);
             label16.Name = "label16";
-            label16.Size = new Size(164, 20);
+            label16.Size = new Size(129, 15);
             label16.TabIndex = 7;
             label16.Text = "RESOLUTIE ENCODER:";
             // 
             // EncoderResolutionTexbBox
             // 
             EncoderResolutionTexbBox.Anchor = AnchorStyles.Right;
-            EncoderResolutionTexbBox.Location = new Point(194, 58);
+            EncoderResolutionTexbBox.Location = new Point(170, 44);
+            EncoderResolutionTexbBox.Margin = new Padding(3, 2, 3, 2);
             EncoderResolutionTexbBox.Name = "EncoderResolutionTexbBox";
-            EncoderResolutionTexbBox.Size = new Size(133, 27);
+            EncoderResolutionTexbBox.Size = new Size(117, 23);
             EncoderResolutionTexbBox.TabIndex = 4;
             EncoderResolutionTexbBox.Text = "30";
             // 
             // advancedoptionsButton
             // 
             advancedoptionsButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            advancedoptionsButton.Location = new Point(0, 317);
+            advancedoptionsButton.Location = new Point(0, 238);
+            advancedoptionsButton.Margin = new Padding(3, 2, 3, 2);
             advancedoptionsButton.Name = "advancedoptionsButton";
-            advancedoptionsButton.Size = new Size(29, 34);
+            advancedoptionsButton.Size = new Size(25, 26);
             advancedoptionsButton.TabIndex = 11;
             advancedoptionsButton.Text = "+";
             advancedoptionsButton.UseVisualStyleBackColor = true;
@@ -525,9 +561,9 @@ namespace Aerotec.GUI
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 458);
+            ClientSize = new Size(700, 344);
             Controls.Add(advancedoptionsButton);
             Controls.Add(AdvancedOptionsBox);
             Controls.Add(ContactButton);
@@ -539,6 +575,7 @@ namespace Aerotec.GUI
             Controls.Add(groupBox2);
             Controls.Add(INFORMATI);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "Interfata Jet3Up";
             INFORMATI.ResumeLayout(false);
