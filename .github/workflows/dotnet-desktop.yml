@@ -1,4 +1,4 @@
-name: Build installer
+name: Build Installer
 
 on:
   push:
@@ -7,39 +7,57 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     strategy:
       matrix:
         configuration: [Release]
 
-    runs-on: windows-latest  # For a list of available runner types, refer to
+    runs-on: windows-latest
 
     env:
-      Solution_Name: Aerotec                      # Replace with your solution name, i.e. MyWpfApp.sln.
+      Solution_Name: Aerotec.sln             # ✅ your main solution file
+      Installer_Project: AerotecInstaller.vdproj  # ✅ your setup project file
+      Configuration: ${{ matrix.configuration }}
 
     steps:
-    - name: Checkout
+    # 1️⃣ Checkout code (with submodules if Jet3up is nested)
+    - name: Checkout repository
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-        submodules: recursive # fetch submodules inside submodules
+        submodules: recursive
 
-    # Install the .NET Core workload
-    - name: Install .NET Core
+    # 2️⃣ Setup .NET
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
 
-    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
+    # 3️⃣ Setup MSBuild
+    - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: msbuild $env:Aerotec /t:Restore /p:Configuration=$env:Configuration
+    # 4️⃣ Restore NuGet packages
+    - name: Restore NuGet packages
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+
+    # 5️⃣ Build the main solution (so binaries exist for the installer)
+    - name: Build main solution
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration
+
+    # 6️⃣ Build the .vdproj installer
+    - name: Build installer (.vdproj)
+      run: |
+        echo "Building installer project..."
+        msbuild $env:Installer_Project /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
 
-  
+    # 7️⃣ Upload the .msi or .exe as an artifact
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Aerotec-Installer
+        path: |
+          **/bin/Release/**/*.msi
+          **/bin/Release/**/*.exe
