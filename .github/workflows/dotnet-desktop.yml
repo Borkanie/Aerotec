@@ -48,10 +48,10 @@ jobs:
     # 6️⃣ Build the .vdproj installer
     - name: Build installer (.vdproj)
       run: |
-        ls -a
+        dir
         echo "Building installer project..."
         cd Setup
-        ls -a
+        dir
         msbuild $env:Installer_Project /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
