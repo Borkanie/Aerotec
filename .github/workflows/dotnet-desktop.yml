@@ -16,7 +16,7 @@ jobs:
 
     env:
       Solution_Name: Aerotec.sln             # ✅ your main solution file
-      Installer_Project: AerotecInstaller.vdproj  # ✅ your setup project file
+      Installer_Project: Setup.vdproj  # ✅ your setup project file
       Configuration: ${{ matrix.configuration }}
 
     steps:
@@ -57,7 +57,7 @@ jobs:
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Aerotec-Installer
+        name: Setup
         path: |
           **/bin/Release/**/*.msi
           **/bin/Release/**/*.exe
