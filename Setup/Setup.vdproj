@@ -25,6 +25,12 @@
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_D2FF86604D6640B08C37F3186C514FDC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -142,6 +148,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D2FF86604D6640B08C37F3186C514FDC"
+            {
+            "SourcePath" = "8:..\\Jet3Up-communication\\Jet3UpCommLib\\Helpers\\Resources\\Controllers.json"
+            "TargetName" = "8:Controllers.json"
+            "Tag" = "8:"
+            "Folder" = "8:_419C09826D3346B0B201045FD5481071"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -156,6 +182,17 @@
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_419C09826D3346B0B201045FD5481071"
+            {
+            "Name" = "8:#1915"
+            "AlwaysCreate" = "11:TRUE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:AppDataFolder"
                 "Folders"
                 {
                 }
@@ -199,7 +236,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Aerotec"
         "ProductCode" = "8:{219FE9BA-DD13-4E01-A536-5CA96D940BE3}"
-        "PackageCode" = "8:{CB526A1E-7A73-46C9-B3A2-DFD97DF6F7EF}"
+        "PackageCode" = "8:{48784F38-84BC-48F4-A4D1-EA737B7B5D85}"
         "UpgradeCode" = "8:{AC3B9BE2-43F3-4838-BAC3-B5BDA770C388}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -748,7 +785,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B55EA0BF62C54FF097A9E4FB71E0934B"
             {
-            "SourcePath" = "8:..\\FrontEnd\\GUI\\obj\\Release\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\FrontEnd\\GUI\\obj\\Release\\net8.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1B30CB4F4AC5464FBCC3E75723D42F5B"
